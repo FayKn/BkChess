@@ -6,22 +6,22 @@
         <img id="blackRookL" src="public/pieces/rook.svg"/>
       </div>
       <div id="a2" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="blackPawn1" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="a3" class="boardItemSize bg-blue-400">
-        3
+
       </div>
       <div id="a4" class="boardItemSize bg-blue-800">
-        4
+
       </div>
       <div id="a5" class="boardItemSize bg-blue-400">
-        5
+
       </div>
       <div id="a6" class="boardItemSize bg-blue-800">
-        6
+
       </div>
       <div id="a7" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="whitePawn1" class="invert w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="a8" class="boardItemSize bg-blue-800">
         <img id="whiteRookL" class="invert" src="public/pieces/rook.svg"/>
@@ -33,7 +33,7 @@
         <img id="blackHorseL" class="w-[70%]" src="public/pieces/horse.svg"/>
       </div>
       <div id="b2" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="blackPawn2" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="b3" class="boardItemSize bg-blue-800">
         3
@@ -48,7 +48,7 @@
         6
       </div>
       <div id="b7" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="whitePawn1" class="invert w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="b8" class="boardItemSize bg-blue-400">
         <img id="whiteHorseL" class="w-[70%] invert" src="public/pieces/horse.svg"/>
@@ -60,7 +60,7 @@
         <img id="blackBitchshopL" class="w-[50%]" src="public/pieces/bitchshop.svg"/>
       </div>
       <div id="c2" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="blackPawn2" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="c3" class="boardItemSize bg-blue-400">
         3
@@ -75,7 +75,7 @@
         6
       </div>
       <div id="c7" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="whitePawn3" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
       </div>
       <div id="c8" class="boardItemSize bg-blue-800">
         <img id="whiteBitchshopL" class="w-[50%] invert" src="public/pieces/bitchshop.svg"/>
@@ -87,7 +87,7 @@
         <img id="blackQueen" class="invert" src="public/pieces/queen.png"/>
       </div>
       <div id="d2" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="blackPawn4" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="d3" class="boardItemSize bg-blue-800">
         3
@@ -102,7 +102,7 @@
         6
       </div>
       <div id="d7" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="whitePawn4" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
       </div>
       <div id="d8" class="boardItemSize bg-blue-400">
         <img id="whiteKing" class="" src="public/pieces/king.png"/>
@@ -114,7 +114,7 @@
         <img id="blackKing" class="invert" src="public/pieces/king.png"/>
       </div>
       <div id="e2" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="blackPawn5" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="e3" class="boardItemSize bg-blue-400">
         3
@@ -129,7 +129,7 @@
         6
       </div>
       <div id="e7" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="whitePawn5" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
       </div>
       <div id="e8" class="boardItemSize bg-blue-800">
         <img id="whiteQueen" class="" src="public/pieces/queen.png"/>
@@ -141,7 +141,7 @@
         <img id="blackBitchshopR" class="w-[50%]" src="public/pieces/bitchshop.svg"/>
       </div>
       <div id="f2" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="blackPawn6" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="f3" class="boardItemSize bg-blue-800">
         3
@@ -156,7 +156,7 @@
         6
       </div>
       <div id="f7" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="whitePawn6" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
       </div>
       <div id="f8" class="boardItemSize bg-blue-400">
         <img id="whiteBitchshopR" class="w-[50%] invert" src="public/pieces/bitchshop.svg"/>
@@ -168,7 +168,7 @@
         <img id="blackHorseR" class="w-[70%]" src="public/pieces/horse.svg"/>
       </div>
       <div id="g2" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="blackPawn7" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="g3" class="boardItemSize bg-blue-400">
         3
@@ -183,7 +183,7 @@
         6
       </div>
       <div id="g7" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="whitePawn7" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
       </div>
       <div id="g8" class="boardItemSize bg-blue-800">
         <img id="whiteHorseR" class="w-[70%] invert" src="public/pieces/horse.svg"/>
@@ -195,7 +195,7 @@
         <img id="blackRookR" src="public/pieces/rook.svg"/>
       </div>
       <div id="h2" class="boardItemSize bg-blue-400">
-        <img @click="movePawn($event)" id="blackPawn8" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="public/pieces/pawn.svg"/>
       </div>
       <div id="h3" class="boardItemSize bg-blue-800">
         3
@@ -210,7 +210,7 @@
         6
       </div>
       <div id="h7" class="boardItemSize bg-blue-800">
-        <img @click="movePawn($event)" id="whitePawn8" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
       </div>
       <div id="h8" class="boardItemSize bg-blue-400">
         <img id="whiteRookL" class="invert" src="public/pieces/rook.svg"/>
@@ -233,20 +233,119 @@ export default {
     }
   },
   methods: {
-    movePawn(targeted) {
-
-      const standingOn = targeted.target.parentElement.id;
+    walkPawn(targeted, moveTo) {
       const currentPawn = targeted.target.id;
+      const currentPawnId = document.getElementById(currentPawn);
+
+      const moveToId = document.getElementById(moveTo);
+
+      console.log(targeted, moveTo);
+
+      const targetClone = currentPawnId.cloneNode(true)
+      console.log(targetClone)
+
+      moveToId.appendChild(targetClone)
+      currentPawnId.remove()
+      const self = this;
+      const _func = function () {
+        self.decideMovePawn(this)
+      }
+      moveToId.addEventListener("click", _func)
+    },
+
+    decideMovePawn(targeted) {
+
+
+      console.log(targeted)
+      // Get block pawn is standing on
+      const standingOn = targeted.target.parentElement.id;
+      // get only number of the square the pawn is standing on
+      const standingOnNum = parseInt(standingOn.slice(1))
+      // get the letter of the square the pawn is standing on
+      const standingOnLett = standingOn.slice(0, 1);
+
+      // Get current pawn in (white/black)Pawn# format
+      const currentPawn = targeted.target.id;
+
+      const currentPawnType = currentPawn.match(/[a-zA-Z]+/g);
+
+      // Get current pawn's number
       const currentPawnNumber = parseInt(currentPawn.match(/\d/g));
 
-      const staningOnNum = parseInt(standingOn.slice(1))
-      if( (staningOnNum-1) === currentPawnNumber){
-        const pawnMoved = false
+      let pawnMoved
+      if(standingOnNum === 2 || standingOnNum === 7) {
+        pawnMoved = false
       }
       else{
-        const pawnMoved = true
+        pawnMoved = true
       }
-    }
+      if(!pawnMoved){
+        let maxMoveTo
+        let alsoMoveable
+        if(standingOnNum === 2) {
+          maxMoveTo = standingOnLett + (standingOnNum + 2)
+          alsoMoveable = standingOnLett + (standingOnNum + 1)
+        }
+        else if(standingOnNum === 7) {
+          maxMoveTo = standingOnLett + (standingOnNum - 2)
+          alsoMoveable = standingOnLett + (standingOnNum - 1)
+        }
+        const maxMoveToId = document.getElementById(maxMoveTo);
+        const alsoMoveableId = document.getElementById(alsoMoveable);
+
+        maxMoveToId.classList.add("!bg-red-400");
+        alsoMoveableId.classList.add("!bg-red-400");
+
+        const self = this
+
+        // Needs this goofy implementation or else I can't remove the event listener
+        const _listener = function() {
+          self.walkPawn(targeted, maxMoveTo);
+          // Cleanup after itself
+          maxMoveToId.removeEventListener("click", _listener);
+          alsoMoveableId.removeEventListener("click", _listener2);
+          maxMoveToId.classList.remove("!bg-red-400");
+          alsoMoveableId.classList.remove("!bg-red-400");
+        };
+        const _listener2 = function() {
+          self.walkPawn(targeted, alsoMoveable);
+          // Cleanup after itself
+          maxMoveToId.removeEventListener("click", _listener);
+          alsoMoveableId.removeEventListener("click", _listener2);
+          maxMoveToId.classList.remove("!bg-red-400");
+          alsoMoveableId.classList.remove("!bg-red-400");
+        };
+
+        maxMoveToId.addEventListener("click", _listener);
+        alsoMoveableId.addEventListener("click", _listener2);
+      }
+      else{
+        console.log("pawn has moved")
+        let moveable
+
+        if(currentPawnType === "blackPawn") {
+          moveable = standingOnLett + (standingOnNum + 1)
+        }
+        else if(currentPawnType === "whitePawn") {
+          moveable = standingOnLett + (standingOnNum - 1)
+        }
+        const moveableId = document.getElementById(moveable);
+
+        moveableId.classList.add("!bg-red-400");
+
+        const self = this
+
+        // Needs this goofy implementation or else I can't remove the event listener
+        const _listener = function() {
+          self.walkPawn(targeted, moveable);
+          // Cleanup after itself
+          moveableId.removeEventListener("click", _listener);
+          moveableId.classList.remove("!bg-red-400");
+        };
+
+        moveableId.addEventListener("click", _listener);
+      }
+    },
   }
 }
 </script>
