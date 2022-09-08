@@ -237,13 +237,12 @@ export default {
       console.log("inWalk")
       let currentPawn
 
-      if(targeted.target === undefined){
+      if (targeted.target === undefined) {
         currentPawn = targeted.id
-        console.log("yeet",currentPawn);
-      }
-      else{
+        console.log("yeet", currentPawn);
+      } else {
         currentPawn = targeted.target.id
-        console.log("yeet",currentPawn);
+        console.log("yeet", currentPawn);
       }
 
       const currentPawnId = document.getElementById(currentPawn);
@@ -267,13 +266,12 @@ export default {
       // Get current pawn in (white/black)Pawn# format
       let currentPawn
 
-      if(targeted.target === undefined){
-         standingOn = targeted.parentElement.id;
-         currentPawn= targeted.id;
-      }
-      else{
-         standingOn = targeted.target.parentElement.id;
-         currentPawn= targeted.target.id;
+      if (targeted.target === undefined) {
+        standingOn = targeted.parentElement.id;
+        currentPawn = targeted.id;
+      } else {
+        standingOn = targeted.target.parentElement.id;
+        currentPawn = targeted.target.id;
       }
 
 
@@ -287,34 +285,44 @@ export default {
       // Get current pawn's number
       const currentPawnNumber = parseInt(currentPawn.match(/\d/g));
 
+      // Check if pawn has been moved so it can only take 2 steps once
       let pawnMoved
-      if((standingOnNum === 2 && currentPawnType[0] === "blackPawn") || (standingOnNum === 7 && currentPawnType[0] === "whitePawn")) {
+      if ((standingOnNum === 2 && currentPawnType[0] === "blackPawn") || (standingOnNum === 7 && currentPawnType[0] === "whitePawn")) {
         pawnMoved = false
-      }
-      else{
+      } else {
         pawnMoved = true
       }
-      if(!pawnMoved){
+
+      if (!pawnMoved) {
         let maxMoveTo
         let alsoMoveable
-        if(standingOnNum === 2 && currentPawnType[0] === "blackPawn") {
+        if (standingOnNum === 2 && currentPawnType[0] === "blackPawn") {
           maxMoveTo = standingOnLett + (standingOnNum + 2)
           alsoMoveable = standingOnLett + (standingOnNum + 1)
-        }
-        else if(standingOnNum === 7 && currentPawnType[0] === "whitePawn") {
+        } else if (standingOnNum === 7 && currentPawnType[0] === "whitePawn") {
           maxMoveTo = standingOnLett + (standingOnNum - 2)
           alsoMoveable = standingOnLett + (standingOnNum - 1)
         }
         const maxMoveToId = document.getElementById(maxMoveTo);
         const alsoMoveableId = document.getElementById(alsoMoveable);
 
-        maxMoveToId.classList.add("!bg-red-400");
-        alsoMoveableId.classList.add("!bg-red-400");
+
+        // Check if pawn is blocked by something
+        const blockedMax = maxMoveToId.childNodes.length > 0
+        const blockedAlso = alsoMoveableId.childNodes.length > 0
+
+
+        if (!blockedMax && !blockedAlso) {
+          maxMoveToId.classList.add("!bg-red-400");
+        }
+        if (!blockedAlso) {
+          alsoMoveableId.classList.add("!bg-red-400");
+        }
 
         const self = this
 
         // Needs this goofy implementation or else I can't remove the event listener
-        const _listener = function() {
+        const _listener = function () {
           self.walkPawn(targeted, maxMoveTo);
           // Cleanup after itself
           maxMoveToId.removeEventListener("click", _listener);
@@ -322,7 +330,7 @@ export default {
           maxMoveToId.classList.remove("!bg-red-400");
           alsoMoveableId.classList.remove("!bg-red-400");
         };
-        const _listener2 = function() {
+        const _listener2 = function () {
           self.walkPawn(targeted, alsoMoveable);
           // Cleanup after itself
           maxMoveToId.removeEventListener("click", _listener);
@@ -331,35 +339,44 @@ export default {
           alsoMoveableId.classList.remove("!bg-red-400");
         };
 
-        maxMoveToId.addEventListener("click", _listener);
-        alsoMoveableId.addEventListener("click", _listener2);
-      }
-      else{
+        if (!blockedMax && !blockedAlso) {
+          maxMoveToId.addEventListener("click", _listener);
+        }
+        if (!blockedAlso) {
+          alsoMoveableId.addEventListener("click", _listener2);
+        }
+      } else {
         console.log("pawn has moved")
         let moveable
 
-        if(currentPawnType[0] === "blackPawn") {
+        if (currentPawnType[0] === "blackPawn") {
           moveable = standingOnLett + (standingOnNum + 1)
-        }
-        else if(currentPawnType[0] === "whitePawn") {
+        } else if (currentPawnType[0] === "whitePawn") {
           moveable = standingOnLett + (standingOnNum - 1)
         }
         const moveableId = document.getElementById(moveable);
 
-        moveableId.classList.add("!bg-red-400");
+        // Check if pawn is blocked by something
+        const blocked = moveableId.childNodes.length > 0
 
-        const self = this
+        // Prevent pawn from moving if blocked
+        if (!blocked) {
 
-        // Needs this goofy implementation or else I can't remove the event listener
-        const _listener = function() {
-          self.walkPawn(targeted, moveable);
-          // Cleanup after itself
-          moveableId.removeEventListener("click", _listener);
-          moveableId.classList.remove("!bg-red-400");
-        };
+          moveableId.classList.add("!bg-red-400");
 
-        moveableId.addEventListener("click", _listener);
-      } 
+          const self = this
+
+          // Needs this goofy implementation or else I can't remove the event listener
+          const _listener = function () {
+            self.walkPawn(targeted, moveable);
+            // Cleanup after itself
+            moveableId.removeEventListener("click", _listener);
+            moveableId.classList.remove("!bg-red-400");
+          };
+
+          moveableId.addEventListener("click", _listener);
+        }
+      }
     },
   }
 }
