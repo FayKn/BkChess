@@ -286,11 +286,9 @@ export default {
       const currentPawnNumber = parseInt(currentPawn.match(/\d/g));
 
       // Check if pawn has been moved so it can only take 2 steps once
-      let pawnMoved
+      let pawnMoved = true
       if ((standingOnNum === 2 && currentPawnType[0] === "blackPawn") || (standingOnNum === 7 && currentPawnType[0] === "whitePawn")) {
         pawnMoved = false
-      } else {
-        pawnMoved = true
       }
 
       if (!pawnMoved) {
