@@ -3,10 +3,10 @@
     <!--row 1 -->
     <div id="a">
       <div id="a1" class="boardItemSize bg-blue-400">
-        <img id="blackRookL" src="public/pieces/rook.svg"/>
+        <img id="blackRookL" src="pieces/rook.svg"/>
       </div>
       <div id="a2" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a3" class="boardItemSize bg-blue-400">
 
@@ -21,19 +21,19 @@
 
       </div>
       <div id="a7" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a8" class="boardItemSize bg-blue-800">
-        <img id="whiteRookL" class="invert" src="public/pieces/rook.svg"/>
+        <img id="whiteRookL" class="invert" src="pieces/rook.svg"/>
       </div>
     </div>
     <!--row 2 -->
     <div id="b">
       <div id="b1" class="boardItemSize bg-blue-800">
-        <img id="blackHorseL" class="w-[70%]" src="public/pieces/horse.svg"/>
+        <img id="blackHorseL" class="w-[70%]" src="pieces/horse.svg"/>
       </div>
       <div id="b2" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="b3" class="boardItemSize bg-blue-800">
 
@@ -48,19 +48,19 @@
 
       </div>
       <div id="b7" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="b8" class="boardItemSize bg-blue-400">
-        <img id="whiteHorseL" class="w-[70%] invert" src="public/pieces/horse.svg"/>
+        <img id="whiteHorseL" class="w-[70%] invert" src="pieces/horse.svg"/>
       </div>
     </div>
     <!--row 3 -->
     <div id="c">
       <div id="c1" class="boardItemSize bg-blue-400">
-        <img id="blackBitchshopL" class="w-[50%]" src="public/pieces/bitchshop.svg"/>
+        <img id="blackBitchshopL" class="w-[50%]" src="pieces/bitchshop.svg"/>
       </div>
       <div id="c2" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="c3" class="boardItemSize bg-blue-400">
 
@@ -74,19 +74,19 @@
 
       </div>
       <div id="c7" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="c8" class="boardItemSize bg-blue-800">
-        <img id="whiteBitchshopL" class="w-[50%] invert" src="public/pieces/bitchshop.svg"/>
+        <img id="whiteBitchshopL" class="w-[50%] invert" src="pieces/bitchshop.svg"/>
       </div>
     </div>
     <!--row 4 -->
     <div id="d">
       <div id="d1" class="boardItemSize bg-blue-800">
-        <img id="blackQueen" class="invert" src="public/pieces/queen.png"/>
+        <img id="blackQueen" class="invert" src="pieces/queen.png"/>
       </div>
       <div id="d2" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="d3" class="boardItemSize bg-blue-800">
 
@@ -101,19 +101,19 @@
 
       </div>
       <div id="d7" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="d8" class="boardItemSize bg-blue-400">
-        <img id="whiteKing" class="" src="public/pieces/king.png"/>
+        <img id="whiteKing" class="" src="pieces/king.png"/>
       </div>
     </div>
     <!--row 5 -->
     <div id="e">
       <div id="e1" class="boardItemSize bg-blue-400">
-        <img id="blackKing" class="invert" src="public/pieces/king.png"/>
+        <img id="blackKing" class="invert" src="pieces/king.png"/>
       </div>
       <div id="e2" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="e3" class="boardItemSize bg-blue-400">
 
@@ -128,19 +128,19 @@
 
       </div>
       <div id="e7" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="e8" class="boardItemSize bg-blue-800">
-        <img id="whiteQueen" class="" src="public/pieces/queen.png"/>
+        <img id="whiteQueen" class="" src="pieces/queen.png"/>
       </div>
     </div>
     <!--row 6 -->
     <div id="f">
       <div id="f1" class="boardItemSize bg-blue-800">
-        <img id="blackBitchshopR" class="w-[50%]" src="public/pieces/bitchshop.svg"/>
+        <img id="blackBitchshopR" class="w-[50%]" src="pieces/bitchshop.svg"/>
       </div>
       <div id="f2" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="f3" class="boardItemSize bg-blue-800">
 
@@ -155,19 +155,19 @@
 
       </div>
       <div id="f7" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="f8" class="boardItemSize bg-blue-400">
-        <img id="whiteBitchshopR" class="w-[50%] invert" src="public/pieces/bitchshop.svg"/>
+        <img id="whiteBitchshopR" class="w-[50%] invert" src="pieces/bitchshop.svg"/>
       </div>
     </div>
     <!--row 7 -->
     <div id="g">
       <div id="g1" class="boardItemSize bg-blue-400">
-        <img id="blackHorseR" class="w-[70%]" src="public/pieces/horse.svg"/>
+        <img id="blackHorseR" class="w-[70%]" src="pieces/horse.svg"/>
       </div>
       <div id="g2" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="g3" class="boardItemSize bg-blue-400">
 
@@ -182,19 +182,19 @@
 
       </div>
       <div id="g7" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="g8" class="boardItemSize bg-blue-800">
-        <img id="whiteHorseR" class="w-[70%] invert" src="public/pieces/horse.svg"/>
+        <img id="whiteHorseR" class="w-[70%] invert" src="pieces/horse.svg"/>
       </div>
     </div>
     <!--row 8 -->
     <div id="h">
       <div id="h1" class="boardItemSize bg-blue-800">
-        <img id="blackRookR" src="public/pieces/rook.svg"/>
+        <img id="blackRookR" src="pieces/rook.svg"/>
       </div>
       <div id="h2" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="h3" class="boardItemSize bg-blue-800">
 
@@ -209,10 +209,10 @@
 
       </div>
       <div id="h7" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" src="public/pieces/pawn.svg"/>
+        <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="h8" class="boardItemSize bg-blue-400">
-        <img id="whiteRookL" class="invert" src="public/pieces/rook.svg"/>
+        <img id="whiteRookL" class="invert" src="pieces/rook.svg"/>
       </div>
     </div>
   </div>
@@ -250,6 +250,30 @@ export default {
       const targetClone = currentPawnId.cloneNode(true)
 
       moveToId.appendChild(targetClone)
+      currentPawnId.remove()
+      const self = this;
+      moveToId.addEventListener("click", self.decideMovePawn(moveToId.childNodes[0]))
+    },
+
+    attackPawn(targeted, moveTo) {
+      let currentPawn
+
+      if (targeted.target === undefined) {
+        currentPawn = targeted.id
+      } else {
+        currentPawn = targeted.target.id
+      }
+
+      const currentPawnId = document.getElementById(currentPawn);
+
+
+      const moveToId = document.getElementById(moveTo);
+
+
+      const targetClone = currentPawnId.cloneNode(true)
+
+      moveToId.appendChild(targetClone)
+      moveToId.childNodes[0].remove();
       currentPawnId.remove()
       const self = this;
       moveToId.addEventListener("click", self.decideMovePawn(moveToId.childNodes[0]))
@@ -312,7 +336,95 @@ export default {
           alsoMoveableId.classList.add("walkColor");
         }
 
+
+        // Get the current letter index the pawn is standing on in the aplhabet array
+        const curLetterindex= this.alphabet.indexOf(standingOnLett)
+
+        let leftPos
+        // Make sure the pawn doesn't go off the board
+        if(curLetterindex > 0){
+          const leftLetter = this.alphabet[curLetterindex - 1]
+          if(currentPawnType[0] === "blackPawn") {
+            leftPos = leftLetter + (standingOnNum+1)
+          }
+          else if (currentPawnType[0] === "whitePawn") {
+            leftPos = leftLetter + (standingOnNum-1)
+          }
+        }
+
+        console.log(leftPos)
+
         const self = this
+
+        let rightPos
+        // Make sure the pawn doesn't go off the board
+        if(curLetterindex < this.alphabet.length - 1){
+          const rightLetter = this.alphabet[curLetterindex + 1]
+
+          // Check what type the pawn is and add or subtract 1 from the number so it moves correctly
+          if(currentPawnType[0] === "blackPawn") {
+            rightPos = rightLetter + (standingOnNum+1)
+          }
+          else if (currentPawnType[0] === "whitePawn") {
+            rightPos = rightLetter + (standingOnNum-1)
+          }
+        }
+        let attackRightId
+        let rightAttackable = false
+        if(rightPos !== undefined){
+          attackRightId = document.getElementById(rightPos);
+          if(attackRightId.childNodes.length > 0){
+            rightAttackable = true
+          }
+        }
+        let attackLeftId
+        let leftAttackable = false
+        if(leftPos !== undefined){
+          attackLeftId = document.getElementById(leftPos);
+          if(attackLeftId.childNodes.length > 0){
+            leftAttackable = true
+          }
+        }
+
+        if(leftAttackable){
+          attackLeftId.classList.add("attackColor");
+          const self = this
+
+          // Needs this goofy implementation or else I can't remove the event listener
+          const _listener = function () {
+            self.attackPawn(targeted, leftPos);
+            // Cleanup after itself
+            attackLeftId.removeEventListener("click", _listener);
+            attackLeftId.classList.remove("attackColor");
+
+            // Remove the other parts too if you have multiple options
+            if(leftAttackable){
+              attackRightId.removeEventListener("click", _listener);
+              attackRightId.classList.remove("attackColor");
+            }
+          };
+
+          attackLeftId.addEventListener("click", _listener);
+        }
+        if(rightAttackable){
+          attackRightId.classList.add("attackColor");
+          const self = this
+
+          // Needs this goofy implementation or else I can't remove the event listener
+          const _listener = function () {
+            self.attackPawn(targeted, rightPos);
+            // Cleanup after itself
+            attackRightId.removeEventListener("click", _listener);
+            attackRightId.classList.remove("attackColor");
+
+            if(leftAttackable){
+              attackLeftId.removeEventListener("click", _listener);
+              attackLeftId.classList.remove("attackColor");
+            }
+          };
+
+          attackRightId.addEventListener("click", _listener);
+        }
 
         // Needs this goofy implementation or else I can't remove the event listener
         const _listener = function () {
@@ -340,7 +452,6 @@ export default {
         }
       }
       else {
-        console.log("pawn has moved")
         let moveable
 
         if (currentPawnType[0] === "blackPawn") {
@@ -362,10 +473,10 @@ export default {
         if(curLetterindex > 0){
           const leftLetter = this.alphabet[curLetterindex - 1]
           if(currentPawnType[0] === "blackPawn") {
-            leftPos = leftLetter + (parseInt(moveable.slice(1)) + 1)
+            leftPos = leftLetter + parseInt(moveable.slice(1))
           }
           else if (currentPawnType[0] === "whitePawn") {
-            leftPos = leftLetter + (parseInt(moveable.slice(1)) - 1)
+            leftPos = leftLetter + parseInt(moveable.slice(1))
           }
         }
 
@@ -376,11 +487,67 @@ export default {
 
           // Check what type the pawn is and add or subtract 1 from the number so it moves correctly
           if(currentPawnType[0] === "blackPawn") {
-            rightPos = rightLetter + (parseInt(moveable.slice(1)) + 1)
+            rightPos = rightLetter + parseInt(moveable.slice(1))
           }
           else if (currentPawnType[0] === "whitePawn") {
-            rightPos = rightLetter + (parseInt(moveable.slice(1)) - 1)
+            rightPos = rightLetter + parseInt(moveable.slice(1))
           }
+        }
+        let attackRightId
+        let rightAttackable = false
+        if(rightPos !== undefined){
+          attackRightId = document.getElementById(rightPos);
+          if(attackRightId.childNodes.length > 0){
+            rightAttackable = true
+          }
+        }
+        let attackLeftId
+        let leftAttackable = false
+        if(leftPos !== undefined){
+          attackLeftId = document.getElementById(leftPos);
+          if(attackLeftId.childNodes.length > 0){
+            leftAttackable = true
+          }
+        }
+
+        if(leftAttackable){
+          attackLeftId.classList.add("attackColor");
+          const self = this
+
+          // Needs this goofy implementation or else I can't remove the event listener
+          const _listener = function () {
+            self.attackPawn(targeted, leftPos);
+            // Cleanup after itself
+            attackLeftId.removeEventListener("click", _listener);
+            attackLeftId.classList.remove("attackColor");
+
+            // Remove the other parts too if you have multiple options
+            if(leftAttackable){
+              attackRightId.removeEventListener("click", _listener);
+              attackRightId.classList.remove("attackColor");
+            }
+          };
+
+          attackLeftId.addEventListener("click", _listener);
+        }
+        if(rightAttackable){
+          attackRightId.classList.add("attackColor");
+          const self = this
+
+          // Needs this goofy implementation or else I can't remove the event listener
+          const _listener = function () {
+            self.attackPawn(targeted, rightPos);
+            // Cleanup after itself
+            attackRightId.removeEventListener("click", _listener);
+            attackRightId.classList.remove("attackColor");
+
+            if(leftAttackable){
+              attackLeftId.removeEventListener("click", _listener);
+              attackLeftId.classList.remove("attackColor");
+            }
+          };
+
+          attackRightId.addEventListener("click", _listener);
         }
 
         // Prevent pawn from moving if blocked
