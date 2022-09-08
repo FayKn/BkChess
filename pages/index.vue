@@ -228,21 +228,17 @@ export default {
   },
   data() {
     return {
-      alphabetic: ["a", "b", "c", "d", "e", "f", "g", "h"],
+      alphabet: ["a", "b", "c", "d", "e", "f", "g", "h"],
     }
   },
   methods: {
     walkPawn(targeted, moveTo) {
-
-      console.log("inWalk")
       let currentPawn
 
       if (targeted.target === undefined) {
         currentPawn = targeted.id
-        console.log("yeet", currentPawn);
       } else {
         currentPawn = targeted.target.id
-        console.log("yeet", currentPawn);
       }
 
       const currentPawnId = document.getElementById(currentPawn);
@@ -260,7 +256,6 @@ export default {
     },
 
     decideMovePawn(targeted) {
-      console.log("Yeet", targeted)
       // Get block pawn is standing on
       let standingOn
       // Get current pawn in (white/black)Pawn# format
@@ -311,10 +306,10 @@ export default {
 
 
         if (!blockedMax && !blockedAlso) {
-          maxMoveToId.classList.add("!bg-red-400");
+          maxMoveToId.classList.add("walkColor");
         }
         if (!blockedAlso) {
-          alsoMoveableId.classList.add("!bg-red-400");
+          alsoMoveableId.classList.add("walkColor");
         }
 
         const self = this
@@ -325,16 +320,16 @@ export default {
           // Cleanup after itself
           maxMoveToId.removeEventListener("click", _listener);
           alsoMoveableId.removeEventListener("click", _listener2);
-          maxMoveToId.classList.remove("!bg-red-400");
-          alsoMoveableId.classList.remove("!bg-red-400");
+          maxMoveToId.classList.remove("walkColor");
+          alsoMoveableId.classList.remove("walkColor");
         };
         const _listener2 = function () {
           self.walkPawn(targeted, alsoMoveable);
           // Cleanup after itself
           maxMoveToId.removeEventListener("click", _listener);
           alsoMoveableId.removeEventListener("click", _listener2);
-          maxMoveToId.classList.remove("!bg-red-400");
-          alsoMoveableId.classList.remove("!bg-red-400");
+          maxMoveToId.classList.remove("walkColor");
+          alsoMoveableId.classList.remove("walkColor");
         };
 
         if (!blockedMax && !blockedAlso) {
@@ -343,13 +338,15 @@ export default {
         if (!blockedAlso) {
           alsoMoveableId.addEventListener("click", _listener2);
         }
-      } else {
+      }
+      else {
         console.log("pawn has moved")
         let moveable
 
         if (currentPawnType[0] === "blackPawn") {
           moveable = standingOnLett + (standingOnNum + 1)
-        } else if (currentPawnType[0] === "whitePawn") {
+        }
+        else if (currentPawnType[0] === "whitePawn") {
           moveable = standingOnLett + (standingOnNum - 1)
         }
         const moveableId = document.getElementById(moveable);
@@ -357,10 +354,39 @@ export default {
         // Check if pawn is blocked by something
         const blocked = moveableId.childNodes.length > 0
 
+        // Get the current letter index the pawn is standing on in the aplhabet array
+        const curLetterindex= this.alphabet.indexOf(moveable.slice(0, 1))
+
+        let leftPos
+        // Make sure the pawn doesn't go off the board
+        if(curLetterindex > 0){
+          const leftLetter = this.alphabet[curLetterindex - 1]
+          if(currentPawnType[0] === "blackPawn") {
+            leftPos = leftLetter + (parseInt(moveable.slice(1)) + 1)
+          }
+          else if (currentPawnType[0] === "whitePawn") {
+            leftPos = leftLetter + (parseInt(moveable.slice(1)) - 1)
+          }
+        }
+
+        let rightPos
+        // Make sure the pawn doesn't go off the board
+        if(curLetterindex < this.alphabet.length - 1){
+          const rightLetter = this.alphabet[curLetterindex + 1]
+
+          // Check what type the pawn is and add or subtract 1 from the number so it moves correctly
+          if(currentPawnType[0] === "blackPawn") {
+            rightPos = rightLetter + (parseInt(moveable.slice(1)) + 1)
+          }
+          else if (currentPawnType[0] === "whitePawn") {
+            rightPos = rightLetter + (parseInt(moveable.slice(1)) - 1)
+          }
+        }
+
         // Prevent pawn from moving if blocked
         if (!blocked) {
 
-          moveableId.classList.add("!bg-red-400");
+          moveableId.classList.add("walkColor");
 
           const self = this
 
@@ -369,7 +395,7 @@ export default {
             self.walkPawn(targeted, moveable);
             // Cleanup after itself
             moveableId.removeEventListener("click", _listener);
-            moveableId.classList.remove("!bg-red-400");
+            moveableId.classList.remove("walkColor");
           };
 
           moveableId.addEventListener("click", _listener);
@@ -383,5 +409,12 @@ export default {
 <style>
 .boardItemSize {
   @apply w-[100px] h-[100px] flex justify-center content-center
+}
+.walkColor {
+  @apply bg-green-400
+}
+
+.attackColor {
+  @apply bg-red-400
 }
 </style>
