@@ -1,12 +1,13 @@
 <template>
   <div class="flex flex-row">
     <!--row 1 -->
+    <!--        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>-->
     <div id="a">
       <div id="a1" class="boardItemSize bg-blue-400">
-        <img id="blackRookL" src="pieces/rook.svg"/>
+
       </div>
       <div id="a2" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
+        <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
       </div>
       <div id="a3" class="boardItemSize bg-blue-400">
 
@@ -272,9 +273,12 @@ export default {
 
       const targetClone = currentPawnId.cloneNode(true)
 
-      moveToId.appendChild(targetClone)
+      // Remove attackee and remove pawn from old position
       moveToId.childNodes[0].remove();
       currentPawnId.remove()
+
+      // Add the cloned pawn to the new position
+      moveToId.appendChild(targetClone)
       const self = this;
       moveToId.addEventListener("click", self.decideMovePawn(moveToId.childNodes[0]))
     },
@@ -285,6 +289,7 @@ export default {
       // Get current pawn in (white/black)Pawn# format
       let currentPawn
 
+      // Make sure the method works for both first and 2nd move
       if (targeted.target === undefined) {
         standingOn = targeted.parentElement.id;
         currentPawn = targeted.id;
@@ -338,17 +343,16 @@ export default {
 
 
         // Get the current letter index the pawn is standing on in the aplhabet array
-        const curLetterindex= this.alphabet.indexOf(standingOnLett)
+        const curLetterindex = this.alphabet.indexOf(standingOnLett)
 
         let leftPos
         // Make sure the pawn doesn't go off the board
-        if(curLetterindex > 0){
+        if (curLetterindex > 0) {
           const leftLetter = this.alphabet[curLetterindex - 1]
-          if(currentPawnType[0] === "blackPawn") {
-            leftPos = leftLetter + (standingOnNum+1)
-          }
-          else if (currentPawnType[0] === "whitePawn") {
-            leftPos = leftLetter + (standingOnNum-1)
+          if (currentPawnType[0] === "blackPawn") {
+            leftPos = leftLetter + (standingOnNum + 1)
+          } else if (currentPawnType[0] === "whitePawn") {
+            leftPos = leftLetter + (standingOnNum - 1)
           }
         }
 
@@ -358,35 +362,34 @@ export default {
 
         let rightPos
         // Make sure the pawn doesn't go off the board
-        if(curLetterindex < this.alphabet.length - 1){
+        if (curLetterindex < this.alphabet.length - 1) {
           const rightLetter = this.alphabet[curLetterindex + 1]
 
           // Check what type the pawn is and add or subtract 1 from the number so it moves correctly
-          if(currentPawnType[0] === "blackPawn") {
-            rightPos = rightLetter + (standingOnNum+1)
-          }
-          else if (currentPawnType[0] === "whitePawn") {
-            rightPos = rightLetter + (standingOnNum-1)
+          if (currentPawnType[0] === "blackPawn") {
+            rightPos = rightLetter + (standingOnNum + 1)
+          } else if (currentPawnType[0] === "whitePawn") {
+            rightPos = rightLetter + (standingOnNum - 1)
           }
         }
         let attackRightId
         let rightAttackable = false
-        if(rightPos !== undefined){
+        if (rightPos !== undefined) {
           attackRightId = document.getElementById(rightPos);
-          if(attackRightId.childNodes.length > 0){
+          if (attackRightId.childNodes.length > 0) {
             rightAttackable = true
           }
         }
         let attackLeftId
         let leftAttackable = false
-        if(leftPos !== undefined){
+        if (leftPos !== undefined) {
           attackLeftId = document.getElementById(leftPos);
-          if(attackLeftId.childNodes.length > 0){
+          if (attackLeftId.childNodes.length > 0) {
             leftAttackable = true
           }
         }
 
-        if(leftAttackable){
+        if (leftAttackable) {
           attackLeftId.classList.add("attackColor");
           const self = this
 
@@ -398,7 +401,7 @@ export default {
             attackLeftId.classList.remove("attackColor");
 
             // Remove the other parts too if you have multiple options
-            if(leftAttackable){
+            if (leftAttackable) {
               attackRightId.removeEventListener("click", _listener);
               attackRightId.classList.remove("attackColor");
             }
@@ -406,7 +409,7 @@ export default {
 
           attackLeftId.addEventListener("click", _listener);
         }
-        if(rightAttackable){
+        if (rightAttackable) {
           attackRightId.classList.add("attackColor");
           const self = this
 
@@ -417,7 +420,7 @@ export default {
             attackRightId.removeEventListener("click", _listener);
             attackRightId.classList.remove("attackColor");
 
-            if(leftAttackable){
+            if (leftAttackable) {
               attackLeftId.removeEventListener("click", _listener);
               attackLeftId.classList.remove("attackColor");
             }
@@ -450,14 +453,12 @@ export default {
         if (!blockedAlso) {
           alsoMoveableId.addEventListener("click", _listener2);
         }
-      }
-      else {
+      } else {
         let moveable
 
         if (currentPawnType[0] === "blackPawn") {
           moveable = standingOnLett + (standingOnNum + 1)
-        }
-        else if (currentPawnType[0] === "whitePawn") {
+        } else if (currentPawnType[0] === "whitePawn") {
           moveable = standingOnLett + (standingOnNum - 1)
         }
         const moveableId = document.getElementById(moveable);
@@ -466,51 +467,49 @@ export default {
         const blocked = moveableId.childNodes.length > 0
 
         // Get the current letter index the pawn is standing on in the aplhabet array
-        const curLetterindex= this.alphabet.indexOf(moveable.slice(0, 1))
+        const curLetterindex = this.alphabet.indexOf(moveable.slice(0, 1))
 
         let leftPos
         // Make sure the pawn doesn't go off the board
-        if(curLetterindex > 0){
+        if (curLetterindex > 0) {
           const leftLetter = this.alphabet[curLetterindex - 1]
-          if(currentPawnType[0] === "blackPawn") {
+          if (currentPawnType[0] === "blackPawn") {
             leftPos = leftLetter + parseInt(moveable.slice(1))
-          }
-          else if (currentPawnType[0] === "whitePawn") {
+          } else if (currentPawnType[0] === "whitePawn") {
             leftPos = leftLetter + parseInt(moveable.slice(1))
           }
         }
 
         let rightPos
         // Make sure the pawn doesn't go off the board
-        if(curLetterindex < this.alphabet.length - 1){
+        if (curLetterindex < this.alphabet.length - 1) {
           const rightLetter = this.alphabet[curLetterindex + 1]
 
           // Check what type the pawn is and add or subtract 1 from the number so it moves correctly
-          if(currentPawnType[0] === "blackPawn") {
+          if (currentPawnType[0] === "blackPawn") {
             rightPos = rightLetter + parseInt(moveable.slice(1))
-          }
-          else if (currentPawnType[0] === "whitePawn") {
+          } else if (currentPawnType[0] === "whitePawn") {
             rightPos = rightLetter + parseInt(moveable.slice(1))
           }
         }
         let attackRightId
         let rightAttackable = false
-        if(rightPos !== undefined){
+        if (rightPos !== undefined) {
           attackRightId = document.getElementById(rightPos);
-          if(attackRightId.childNodes.length > 0){
+          if (attackRightId.childNodes.length > 0) {
             rightAttackable = true
           }
         }
         let attackLeftId
         let leftAttackable = false
-        if(leftPos !== undefined){
+        if (leftPos !== undefined) {
           attackLeftId = document.getElementById(leftPos);
-          if(attackLeftId.childNodes.length > 0){
+          if (attackLeftId.childNodes.length > 0) {
             leftAttackable = true
           }
         }
 
-        if(leftAttackable){
+        if (leftAttackable) {
           attackLeftId.classList.add("attackColor");
           const self = this
 
@@ -522,7 +521,7 @@ export default {
             attackLeftId.classList.remove("attackColor");
 
             // Remove the other parts too if you have multiple options
-            if(leftAttackable){
+            if (leftAttackable) {
               attackRightId.removeEventListener("click", _listener);
               attackRightId.classList.remove("attackColor");
             }
@@ -530,7 +529,7 @@ export default {
 
           attackLeftId.addEventListener("click", _listener);
         }
-        if(rightAttackable){
+        if (rightAttackable) {
           attackRightId.classList.add("attackColor");
           const self = this
 
@@ -540,11 +539,8 @@ export default {
             // Cleanup after itself
             attackRightId.removeEventListener("click", _listener);
             attackRightId.classList.remove("attackColor");
-
-            if(leftAttackable){
-              attackLeftId.removeEventListener("click", _listener);
-              attackLeftId.classList.remove("attackColor");
-            }
+            attackLeftId.removeEventListener("click", _listener);
+            attackLeftId.classList.remove("attackColor");
           };
 
           attackRightId.addEventListener("click", _listener);
@@ -569,6 +565,49 @@ export default {
         }
       }
     },
+
+
+    decideMoveRook(targeted) {
+
+      // Get block pawn is standing on
+      let standingOn
+      // Get current pawn in (white/black)Rook(R/L) format
+      let currentRook
+      if (targeted.target === undefined) {
+        standingOn = targeted.parentElement.id;
+        currentRook = targeted.id;
+      } else {
+        standingOn = targeted.target.parentElement.id;
+        currentRook = targeted.target.id;
+      }
+
+      // get only number of the square the pawn is standing on
+      const standingOnNum = parseInt(standingOn.slice(1))
+
+      // get the letter of the square the pawn is standing on
+      const standingOnLett = standingOn.slice(0, 1);
+
+      const currentRookColor = currentRook.match(/[^RoL]+/g)[0];
+
+      if (currentRookColor === "black") {
+        let maxMoveTo
+        for (let i = 1; i < 8; i++) {
+          let standingOnId = document.getElementById(standingOnLett + i)
+          if (standingOnId.childNodes.length > 0 && standingOnId.childNodes[0] !== document.getElementById(currentRook)) {
+            maxMoveTo = standingOnLett + i
+            break
+          }
+          if (standingOnId.childNodes[0] !== document.getElementById(currentRook)) {
+            standingOnId.classList.add("walkColor");
+          }
+        }
+        console.log(maxMoveTo)
+      } else if (currentRookColor === "white") {
+        console.log("ZOMG WHITE ROOK")
+      }
+
+
+    },
   }
 }
 </script>
@@ -577,6 +616,7 @@ export default {
 .boardItemSize {
   @apply w-[100px] h-[100px] flex justify-center content-center
 }
+
 .walkColor {
   @apply bg-green-400
 }
