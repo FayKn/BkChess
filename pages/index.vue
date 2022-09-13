@@ -1,16 +1,16 @@
 <template>
   <div class="flex flex-row">
     <!--row 1 -->
-    <!--        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>-->
+    <!--        -->
     <div id="a">
       <div id="a1" class="boardItemSize bg-blue-400">
-
+        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a2" class="boardItemSize bg-blue-800">
-        <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
+
       </div>
       <div id="a3" class="boardItemSize bg-blue-400">
-
+        <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
       </div>
       <div id="a4" class="boardItemSize bg-blue-800">
 
@@ -25,7 +25,7 @@
         <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a8" class="boardItemSize bg-blue-800">
-        <img id="whiteRookL" class="invert" src="pieces/rook.svg"/>
+        <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
       </div>
     </div>
     <!--row 2 -->
@@ -67,6 +67,7 @@
 
       </div>
       <div id="c4" class="boardItemSize bg-blue-800">
+
       </div>
       <div id="c5" class="boardItemSize bg-blue-400">
 
@@ -84,7 +85,7 @@
     <!--row 4 -->
     <div id="d">
       <div id="d1" class="boardItemSize bg-blue-800">
-        <img id="blackQueen" class="invert" src="pieces/queen.png"/>
+        <img id="blackKing" class="invert" src="pieces/king.png"/>
       </div>
       <div id="d2" class="boardItemSize bg-blue-400">
         <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -111,7 +112,7 @@
     <!--row 5 -->
     <div id="e">
       <div id="e1" class="boardItemSize bg-blue-400">
-        <img id="blackKing" class="invert" src="pieces/king.png"/>
+        <img id="blackQueen" class="invert" src="pieces/queen.png"/>
       </div>
       <div id="e2" class="boardItemSize bg-blue-800">
         <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -192,7 +193,7 @@
     <!--row 8 -->
     <div id="h">
       <div id="h1" class="boardItemSize bg-blue-800">
-        <img id="blackRookR" src="pieces/rook.svg"/>
+        <img @click="decideMoveRook($event)" id="blackRookR" src="pieces/rook.svg"/>
       </div>
       <div id="h2" class="boardItemSize bg-blue-400">
         <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -213,7 +214,7 @@
         <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="h8" class="boardItemSize bg-blue-400">
-        <img id="whiteRookL" class="invert" src="pieces/rook.svg"/>
+        <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
       </div>
     </div>
   </div>
@@ -330,22 +331,23 @@ export default {
 
 
         // Check if pawn is blocked by something
+
         const blockedMax = maxMoveToId.childNodes.length > 0
         const blockedAlso = alsoMoveableId.childNodes.length > 0
-
-
         if (!blockedMax && !blockedAlso) {
+
+
           maxMoveToId.classList.add("walkColor");
         }
         if (!blockedAlso) {
           alsoMoveableId.classList.add("walkColor");
         }
-
-
         // Get the current letter index the pawn is standing on in the aplhabet array
-        const curLetterindex = this.alphabet.indexOf(standingOnLett)
 
+
+        const curLetterindex = this.alphabet.indexOf(standingOnLett)
         let leftPos
+
         // Make sure the pawn doesn't go off the board
         if (curLetterindex > 0) {
           const leftLetter = this.alphabet[curLetterindex - 1]
@@ -355,29 +357,31 @@ export default {
             leftPos = leftLetter + (standingOnNum - 1)
           }
         }
-
         console.log(leftPos)
 
         const self = this
 
         let rightPos
+
         // Make sure the pawn doesn't go off the board
         if (curLetterindex < this.alphabet.length - 1) {
           const rightLetter = this.alphabet[curLetterindex + 1]
-
           // Check what type the pawn is and add or subtract 1 from the number so it moves correctly
+
           if (currentPawnType[0] === "blackPawn") {
             rightPos = rightLetter + (standingOnNum + 1)
           } else if (currentPawnType[0] === "whitePawn") {
             rightPos = rightLetter + (standingOnNum - 1)
           }
         }
+        const currentPawnColor = currentPawn.match(/[black||white]+/g)[0];
+
         let attackRightId
         let rightAttackable = false
         if (rightPos !== undefined) {
           attackRightId = document.getElementById(rightPos);
           if (attackRightId.childNodes.length > 0) {
-            rightAttackable = true
+            rightAttackable = attackRightId.childNodes[0].id.match(/[black||white]+/g)[0] !== currentPawnColor;
           }
         }
         let attackLeftId
@@ -385,7 +389,7 @@ export default {
         if (leftPos !== undefined) {
           attackLeftId = document.getElementById(leftPos);
           if (attackLeftId.childNodes.length > 0) {
-            leftAttackable = true
+            leftAttackable = attackLeftId.childNodes[0].id.match(/[black||white]+/g)[0] !== currentPawnColor;
           }
         }
 
@@ -566,9 +570,7 @@ export default {
       }
     },
 
-
     decideMoveRook(targeted) {
-
       // Get block pawn is standing on
       let standingOn
       // Get current pawn in (white/black)Rook(R/L) format
@@ -589,24 +591,102 @@ export default {
 
       const currentRookColor = currentRook.match(/[^RoL]+/g)[0];
 
-      if (currentRookColor === "black") {
         let maxMoveTo
-        for (let i = 1; i < 8; i++) {
-          let standingOnId = document.getElementById(standingOnLett + i)
-          if (standingOnId.childNodes.length > 0 && standingOnId.childNodes[0] !== document.getElementById(currentRook)) {
-            maxMoveTo = standingOnLett + i
+        let topMax
+        let bottomMax
+        for (let i = 1; i < 9; i++) {
+          let topEmpty = false
+          let bottomEmpty = false
+          let canGoTo = document.getElementById(standingOnLett + i)
+          maxMoveTo = standingOnLett + i
+
+          if(canGoTo.childNodes.length === 0 && i === 1) {
+            topMax = standingOnLett + 1
+            topEmpty = true
+          }
+          if(canGoTo.childNodes.length === 0 && i === 8) {
+            bottomMax = standingOnLett + 8
+            bottomEmpty = true
+          }
+
+          if (canGoTo.childNodes.length > 0 && canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
+            if(i < standingOnNum) {
+              topMax = maxMoveTo
+            } else {
+              bottomMax = maxMoveTo
+            }
+            console.log("topMax", topMax, "bottomMax", bottomMax)
+          }
+
+          if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
+            canGoTo.classList.add("walkColor");
+          }
+
+          if(topMax !== undefined && bottomMax !== undefined) {
+            const goToColor= canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
+            if(!topEmpty){
+              canGoTo.classList.remove("walkColor");
+              if(goToColor !== currentRookColor) {
+                canGoTo.classList.add("attackColor");
+              }
+            }
+            if(!bottomEmpty){
+              canGoTo.classList.remove("walkColor");
+              if(goToColor !== currentRookColor) {
+                canGoTo.classList.add("attackColor");
+              }
+            }
             break
           }
-          if (standingOnId.childNodes[0] !== document.getElementById(currentRook)) {
-            standingOnId.classList.add("walkColor");
-          }
         }
-        console.log(maxMoveTo)
-      } else if (currentRookColor === "white") {
-        console.log("ZOMG WHITE ROOK")
-      }
 
+        let leftMax
+        let rightMax
+        let curLetterindex = this.alphabet.indexOf(standingOnLett)
+         for (let i = 1; i < 9; i++) {
+           let leftEmpty = false
+           let rightEmpty = false
+           let canGoTo = document.getElementById(this.alphabet[i] + standingOnNum)
+           maxMoveTo = this.alphabet[i] + standingOnNum
 
+           if (canGoTo.childNodes.length === 0 && i === 1) {
+             leftMax = this.alphabet[1] + standingOnNum
+             leftEmpty = true
+           }
+           if (canGoTo.childNodes.length === 0 && i === 8) {
+             rightMax = this.alphabet[8] + standingOnNum
+             rightEmpty = true
+           }
+
+           if (canGoTo.childNodes.length > 0 && canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
+             if (i < this.alphabet.indexOf(standingOnLett)) {
+               leftMax = maxMoveTo
+             } else {
+               rightMax = maxMoveTo
+             }
+           }
+
+           if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
+             canGoTo.classList.add("walkColor");
+           }
+
+           if(leftMax !== undefined && rightMax !== undefined) {
+             const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
+             if (!leftEmpty) {
+               canGoTo.classList.remove("walkColor");
+               if (goToColor !== currentRookColor) {
+                 canGoTo.classList.add("attackColor");
+               }
+             }
+             if (!rightEmpty) {
+               canGoTo.classList.remove("walkColor");
+               if (goToColor !== currentRookColor) {
+                 canGoTo.classList.add("attackColor");
+               }
+             }
+             break
+           }
+         }
     },
   }
 }
