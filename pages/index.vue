@@ -31,7 +31,7 @@
     <!--row 2 -->
     <div id="b">
       <div id="b1" class="boardItemSize bg-blue-800">
-        <img id="blackHorseL" class="w-[70%]" src="pieces/horse.svg"/>
+        <img id="blackHorseL" class="w-[70%] invert" src="pieces/brute.png"/>
       </div>
       <div id="b2" class="boardItemSize bg-blue-400">
         <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -52,7 +52,7 @@
         <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="b8" class="boardItemSize bg-blue-400">
-        <img id="whiteHorseL" class="w-[70%] invert" src="pieces/horse.svg"/>
+        <img id="whiteHorseL" class="w-[70%]" src="pieces/brute.png"/>
       </div>
     </div>
     <!--row 3 -->
@@ -166,7 +166,7 @@
     <!--row 7 -->
     <div id="g">
       <div id="g1" class="boardItemSize bg-blue-400">
-        <img id="blackHorseR" class="w-[70%]" src="pieces/horse.svg"/>
+        <img id="blackHorseR" class="w-[70%] invert" src="pieces/brute.png"/>
       </div>
       <div id="g2" class="boardItemSize bg-blue-800">
         <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -187,7 +187,7 @@
         <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="g8" class="boardItemSize bg-blue-800">
-        <img id="whiteHorseR" class="w-[70%] invert" src="pieces/horse.svg"/>
+        <img id="whiteHorseR" class="w-[70%]" src="pieces/brute.png"/>
       </div>
     </div>
     <!--row 8 -->
@@ -623,6 +623,7 @@ export default {
           }
 
           if(topMax !== undefined && bottomMax !== undefined) {
+            console.log("topMax", topMax, "bottomMax", bottomMax)
             const goToColor= canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
             if(!topEmpty){
               canGoTo.classList.remove("walkColor");
