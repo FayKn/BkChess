@@ -4,13 +4,13 @@
     <!--        -->
     <div id="a">
       <div id="a1" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
-      </div>
-      <div id="a2" class="boardItemSize bg-blue-800">
 
       </div>
-      <div id="a3" class="boardItemSize bg-blue-400">
+      <div id="a2" class="boardItemSize bg-blue-800">
         <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
+      </div>
+      <div id="a3" class="boardItemSize bg-blue-400">
+        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a4" class="boardItemSize bg-blue-800">
 
@@ -357,7 +357,6 @@ export default {
             leftPos = leftLetter + (standingOnNum - 1)
           }
         }
-        console.log(leftPos)
 
         const self = this
 
@@ -591,103 +590,144 @@ export default {
 
       const currentRookColor = currentRook.match(/[^RoL]+/g)[0];
 
-        let maxMoveTo
-        let topMax
-        let bottomMax
-        for (let i = 1; i < 9; i++) {
-          let topEmpty = false
-          let bottomEmpty = false
-          let canGoTo = document.getElementById(standingOnLett + i)
-          maxMoveTo = standingOnLett + i
+      let maxMoveTo
+      let topMax
+      let bottomMax
+      for (let i = 1; i < 9; i++) {
+        let topEmpty = false
+        let bottomEmpty = false
+        let canGoTo = document.getElementById(standingOnLett + i)
+        maxMoveTo = standingOnLett + i
 
-          if(canGoTo.childNodes.length === 0 && i === 1) {
-            topMax = standingOnLett + 1
-            topEmpty = true
-          }
-          if(canGoTo.childNodes.length === 0 && i === 8) {
-            bottomMax = standingOnLett + 8
-            bottomEmpty = true
-          }
+        if (canGoTo.childNodes.length === 0 && i === 1) {
+          topMax = standingOnLett + 1
+          topEmpty = true
+        }
+        if (canGoTo.childNodes.length === 0 && i === 8) {
+          bottomMax = standingOnLett + 8
+          bottomEmpty = true
+        }
 
-          if (canGoTo.childNodes.length > 0 && canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
-            if(i < standingOnNum) {
+        let stuckFront = false
+        let stuckBack = false
+        console.log("yeet", typeof(canGoTo.childNodes.length))
+        if (canGoTo.childNodes.length !== 0){
+          console.log("go to ",canGoTo.childNodes)
+          if (canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
+            const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
+            if (goToColor === currentRookColor) {
+              stuckFront = true
+            }
+          }
+        }
+
+
+        let canGoToPrev
+        if(i===1){
+          canGoToPrev = document.getElementById(standingOnLett + i)
+        }
+        else{
+          canGoToPrev = document.getElementById(standingOnLett + (i - 1))
+        }
+        if (canGoToPrev.childNodes.length !== 0) {
+          console.log("prev ",canGoToPrev.childNodes)
+          if(canGoToPrev.childNodes[0] !== document.getElementById(currentRook)) {
+            const goToColor = canGoToPrev.childNodes[0].id.match(/[black|white]+/g)[0]
+            console.log("go to color", goToColor, "current rook color", currentRookColor)
+            if (canGoToPrev === currentRookColor) {
+              stuckBack = true
+            }
+          }
+        }
+
+        if (stuckFront && stuckBack) {
+          break
+        }
+        console.log("Stuck", stuckFront, stuckBack)
+
+
+        if (canGoTo.childNodes.length > 0) {
+          if(canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
+            if (i < standingOnNum) {
               topMax = maxMoveTo
             } else {
               bottomMax = maxMoveTo
             }
-            console.log("topMax", topMax, "bottomMax", bottomMax)
-          }
-
-          if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
-            canGoTo.classList.add("walkColor");
-          }
-
-          if(topMax !== undefined && bottomMax !== undefined) {
-            console.log("topMax", topMax, "bottomMax", bottomMax)
-            const goToColor= canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
-            if(!topEmpty){
-              canGoTo.classList.remove("walkColor");
-              if(goToColor !== currentRookColor) {
-                canGoTo.classList.add("attackColor");
-              }
-            }
-            if(!bottomEmpty){
-              canGoTo.classList.remove("walkColor");
-              if(goToColor !== currentRookColor) {
-                canGoTo.classList.add("attackColor");
-              }
-            }
-            break
           }
         }
 
-        let leftMax
-        let rightMax
-        let curLetterindex = this.alphabet.indexOf(standingOnLett)
-         for (let i = 1; i < 9; i++) {
-           let leftEmpty = false
-           let rightEmpty = false
-           let canGoTo = document.getElementById(this.alphabet[i] + standingOnNum)
-           maxMoveTo = this.alphabet[i] + standingOnNum
+        if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
+          canGoTo.classList.add("walkColor");
+        }
 
-           if (canGoTo.childNodes.length === 0 && i === 1) {
-             leftMax = this.alphabet[1] + standingOnNum
-             leftEmpty = true
-           }
-           if (canGoTo.childNodes.length === 0 && i === 8) {
-             rightMax = this.alphabet[8] + standingOnNum
-             rightEmpty = true
-           }
+        if (topMax !== undefined && bottomMax !== undefined) {
+          const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
+          console.log("topMax", topMax, "bottomMax", bottomMax)
+          if (!topEmpty) {
+            canGoTo.classList.remove("walkColor");
+            if (goToColor !== currentRookColor) {
+              canGoTo.classList.add("attackColor");
+            }
+          }
+          if (!bottomEmpty) {
+            canGoTo.classList.remove("walkColor");
+            if (goToColor !== currentRookColor) {
+              canGoTo.classList.add("attackColor");
+            }
+          }
 
-           if (canGoTo.childNodes.length > 0 && canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
-             if (i < this.alphabet.indexOf(standingOnLett)) {
-               leftMax = maxMoveTo
-             } else {
-               rightMax = maxMoveTo
-             }
-           }
+          console.log('TopMax ', topMax, 'bottomMax', bottomMax, 'topEmpty', topEmpty, 'bottomEmpty', bottomEmpty, 'can go to ', canGoTo, 'can go to child', canGoTo.childNodes)
+          break
+        }
+      }
 
-           if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
-             canGoTo.classList.add("walkColor");
-           }
+      let leftMax
+      let rightMax
+      let curLetterindex = this.alphabet.indexOf(standingOnLett)
+      for (let i = 1; i < 9; i++) {
+        let leftEmpty = false
+        let rightEmpty = false
+        let canGoTo = document.getElementById(this.alphabet[i] + standingOnNum)
+        maxMoveTo = this.alphabet[i] + standingOnNum
 
-           if(leftMax !== undefined && rightMax !== undefined) {
-             const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
-             if (!leftEmpty) {
-               canGoTo.classList.remove("walkColor");
-               if (goToColor !== currentRookColor) {
-                 canGoTo.classList.add("attackColor");
-               }
-             }
-             if (!rightEmpty) {
-               canGoTo.classList.remove("walkColor");
-               if (goToColor !== currentRookColor) {
-                 canGoTo.classList.add("attackColor");
-               }
-             }
-             break
-           }
-         }
+        if (canGoTo.childNodes.length === 0 && i === 1) {
+          leftMax = this.alphabet[1] + standingOnNum
+          leftEmpty = true
+        }
+        if (canGoTo.childNodes.length === 0 && i === 8) {
+          rightMax = this.alphabet[8] + standingOnNum
+          rightEmpty = true
+        }
+
+        if (canGoTo.childNodes.length > 0 && canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
+          if (i < this.alphabet.indexOf(standingOnLett)) {
+            leftMax = maxMoveTo
+          } else {
+            rightMax = maxMoveTo
+          }
+        }
+
+        if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
+          canGoTo.classList.add("walkColor");
+        }
+
+        if (leftMax !== undefined && rightMax !== undefined) {
+          const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
+          if (!leftEmpty) {
+            canGoTo.classList.remove("walkColor");
+            if (goToColor !== currentRookColor) {
+              canGoTo.classList.add("attackColor");
+            }
+          }
+          if (!rightEmpty) {
+            canGoTo.classList.remove("walkColor");
+            if (goToColor !== currentRookColor) {
+              canGoTo.classList.add("attackColor");
+            }
+          }
+          break
+        }
+      }
     },
   }
 }
