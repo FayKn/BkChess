@@ -10,22 +10,21 @@
         <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
       </div>
       <div id="a3" class="boardItemSize bg-blue-400">
-        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a4" class="boardItemSize bg-blue-800">
-
+        <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a5" class="boardItemSize bg-blue-400">
 
       </div>
       <div id="a6" class="boardItemSize bg-blue-800">
-
+        <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
       </div>
       <div id="a7" class="boardItemSize bg-blue-400">
         <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
       </div>
       <div id="a8" class="boardItemSize bg-blue-800">
-        <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
+
       </div>
     </div>
     <!--row 2 -->
@@ -100,10 +99,10 @@
 
       </div>
       <div id="d6" class="boardItemSize bg-blue-400">
-
+        <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" src="pieces/pawn.svg"/>
       </div>
       <div id="d7" class="boardItemSize bg-blue-800">
-        <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" src="pieces/pawn.svg"/>
+
       </div>
       <div id="d8" class="boardItemSize bg-blue-400">
         <img id="whiteKing" class="" src="pieces/king.png"/>
@@ -231,6 +230,7 @@ export default {
   data() {
     return {
       alphabet: ["a", "b", "c", "d", "e", "f", "g", "h"],
+      freeData:null
     }
   },
   methods: {
@@ -255,6 +255,12 @@ export default {
       currentPawnId.remove()
       const self = this;
       moveToId.addEventListener("click", self.decideMovePawn(moveToId.childNodes[0]))
+      document.querySelectorAll(".walkColor").forEach((el) => {
+        el.classList.remove("walkColor");
+      });
+      document.querySelectorAll(".attackColor").forEach((el) => {
+        el.classList.remove("attackColor");
+      });
     },
 
     attackPawn(targeted, moveTo) {
@@ -569,7 +575,42 @@ export default {
       }
     },
 
+    walkRook(targeted, moveTo){
+      let currentRook
+
+      if (targeted.target === undefined) {
+        currentRook = targeted.id
+      } else {
+        currentRook = targeted.target.id
+      }
+
+      const currentPawnId = document.getElementById(currentRook);
+
+
+      const moveToId = document.getElementById(moveTo);
+
+
+      const targetClone = currentPawnId.cloneNode(true)
+
+      moveToId.appendChild(targetClone)
+      currentPawnId.remove()
+      const self = this;
+      // I needed to make the function a variable to call it, dunno why but I need to do it
+      const _listener = function () {
+        console.log(moveToId.childNodes[0])
+        self.decideMoveRook(moveToId.childNodes[0]);
+      };
+      moveToId.addEventListener("click", _listener, { once: true });
+      document.querySelectorAll(".walkColor").forEach((el) => {
+        el.classList.remove("walkColor");
+      });
+      document.querySelectorAll(".attackColor").forEach((el) => {
+        el.classList.remove("attackColor");
+      });
+    },
+
     decideMoveRook(targeted) {
+
       // Get block pawn is standing on
       let standingOn
       // Get current pawn in (white/black)Rook(R/L) format
@@ -610,9 +651,7 @@ export default {
 
         let stuckFront = false
         let stuckBack = false
-        console.log("yeet", typeof(canGoTo.childNodes.length))
-        if (canGoTo.childNodes.length !== 0){
-          console.log("go to ",canGoTo.childNodes)
+        if (canGoTo.childNodes.length !== 0) {
           if (canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
             const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
             if (goToColor === currentRookColor) {
@@ -623,18 +662,11 @@ export default {
 
 
         let canGoToPrev
-        if(i===1){
-          canGoToPrev = document.getElementById(standingOnLett + i)
-        }
-        else{
-          canGoToPrev = document.getElementById(standingOnLett + (i - 1))
-        }
+        canGoToPrev = document.getElementById(standingOnLett + (standingOnNum + 1))
         if (canGoToPrev.childNodes.length !== 0) {
-          console.log("prev ",canGoToPrev.childNodes)
-          if(canGoToPrev.childNodes[0] !== document.getElementById(currentRook)) {
+          if (canGoToPrev.childNodes[0] !== document.getElementById(currentRook)) {
             const goToColor = canGoToPrev.childNodes[0].id.match(/[black|white]+/g)[0]
-            console.log("go to color", goToColor, "current rook color", currentRookColor)
-            if (canGoToPrev === currentRookColor) {
+            if (goToColor === currentRookColor) {
               stuckBack = true
             }
           }
@@ -643,11 +675,10 @@ export default {
         if (stuckFront && stuckBack) {
           break
         }
-        console.log("Stuck", stuckFront, stuckBack)
 
 
         if (canGoTo.childNodes.length > 0) {
-          if(canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
+          if (canGoTo.childNodes[0] !== document.getElementById(currentRook)) {
             if (i < standingOnNum) {
               topMax = maxMoveTo
             } else {
@@ -658,33 +689,45 @@ export default {
 
         if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
           canGoTo.classList.add("walkColor");
+
+          const self = this
+          const canGoToCopy = canGoTo
+          const maxMoveToCopy = maxMoveTo
+
+          const _listener = function () {
+            self.walkRook(targeted, maxMoveToCopy);
+            // Cleanup after itself
+            canGoToCopy.removeEventListener("click", _listener);
+          };
+
+          canGoTo.addEventListener("click", _listener, {once: true});
         }
 
-        if (topMax !== undefined && bottomMax !== undefined) {
+        if ((topMax !== undefined || bottomMax !== undefined) && canGoTo.childNodes.length > 0) {
           const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
-          console.log("topMax", topMax, "bottomMax", bottomMax)
           if (!topEmpty) {
             canGoTo.classList.remove("walkColor");
             if (goToColor !== currentRookColor) {
               canGoTo.classList.add("attackColor");
             }
+          } else {
+            console.log("goofed")
           }
+
           if (!bottomEmpty) {
             canGoTo.classList.remove("walkColor");
             if (goToColor !== currentRookColor) {
               canGoTo.classList.add("attackColor");
             }
           }
-
-          console.log('TopMax ', topMax, 'bottomMax', bottomMax, 'topEmpty', topEmpty, 'bottomEmpty', bottomEmpty, 'can go to ', canGoTo, 'can go to child', canGoTo.childNodes)
-          break
+          // console.log('TopMax ', topMax, 'bottomMax', bottomMax, 'topEmpty', topEmpty, 'bottomEmpty', bottomEmpty, 'can go to ', canGoTo, 'can go to child', canGoTo.childNodes)
         }
       }
 
       let leftMax
       let rightMax
       let curLetterindex = this.alphabet.indexOf(standingOnLett)
-      for (let i = 1; i < 9; i++) {
+      for (let i = 0; i < 8; i++) {
         let leftEmpty = false
         let rightEmpty = false
         let canGoTo = document.getElementById(this.alphabet[i] + standingOnNum)
@@ -709,6 +752,17 @@ export default {
 
         if (canGoTo.childNodes[0] !== document.getElementById(currentRook) && canGoTo.childNodes.length === 0) {
           canGoTo.classList.add("walkColor");
+          const self = this
+          const canGoToCopy = canGoTo
+          const maxMoveToCopy = maxMoveTo
+
+          const _listener = function () {
+            self.walkRook(targeted, maxMoveToCopy);
+            // Cleanup after itself
+            canGoToCopy.removeEventListener("click", _listener);
+          };
+
+          canGoTo.addEventListener("click", _listener, {once: true});
         }
 
         if (leftMax !== undefined && rightMax !== undefined) {
