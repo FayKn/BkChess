@@ -1,13 +1,12 @@
 <template>
   <div id="wrapper">
-    <h1>{{ turn }}</h1>
+    <h1 class="text-white">{{ turn }}</h1>
     <div id="board">
       <div class="flex flex-row select-none">
         <!--row 1 -->
-        <!--        -->
         <div id="a">
           <div id="a1" class="boardItemSize bg-blue-400">
-          <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
           </div>
           <div id="a2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -17,12 +16,10 @@
           <div id="a4" class="boardItemSize bg-blue-800">
           </div>
           <div id="a5" class="boardItemSize bg-blue-400">
-
           </div>
           <div id="a6" class="boardItemSize bg-blue-800">
           </div>
           <div id="a7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="a8" class="boardItemSize bg-blue-800">
             <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
@@ -239,8 +236,9 @@ export default {
   methods: {
     switchTurn() {
       if (this.turn === "white") {
-        this.turn = "black"
+        this.turn = "white"
       } else {
+        // TODO: change back to white
         this.turn = "white"
       }
       const board = document.getElementById("board")
@@ -258,7 +256,7 @@ export default {
             this.decideMovePawn(e)
           })
         } else {
-          console.log("no "+ this.turn + " pawn " + i)
+          console.log("no " + this.turn + " pawn " + i)
         }
       }
 
@@ -607,7 +605,6 @@ export default {
       const self = this;
       // I needed to make the function a variable to call it, dunno why but I need to do it
       const _listener = function () {
-        console.log(moveToId.childNodes[0])
         self.decideMoveRook(moveToId.childNodes[0]);
       };
       moveToId.addEventListener("click", _listener);
@@ -617,6 +614,37 @@ export default {
       document.querySelectorAll(".attackColor").forEach((el) => {
         el.classList.remove("attackColor");
       });
+      this.switchTurn()
+    },
+
+    attackRook(targeted, moveTo) {
+      let currentRook
+
+      if (targeted.target === undefined) {
+        currentRook = targeted.id
+      } else {
+        currentRook = targeted.target.id
+      }
+
+      const currentPawnId = document.getElementById(currentRook);
+
+      const moveToId = document.getElementById(moveTo);
+
+      const targetClone = currentPawnId.cloneNode()
+
+      // Remove attackee and remove pawn from old position
+      moveToId.childNodes[0].remove();
+      targeted.target.remove()
+
+      // Add the cloned pawn to the new position
+      moveToId.appendChild(targetClone)
+      document.querySelectorAll(".walkColor").forEach((el) => {
+        el.classList.remove("walkColor");
+      });
+      document.querySelectorAll(".attackColor").forEach((el) => {
+        el.classList.remove("attackColor");
+      });
+
       this.switchTurn()
     },
 
@@ -671,17 +699,19 @@ export default {
           }
         }
 
-
         let canGoToPrev
         canGoToPrev = document.getElementById(standingOnLett + (standingOnNum + 1))
-        if (canGoToPrev.childNodes.length !== 0) {
-          if (canGoToPrev.childNodes[0] !== document.getElementById(currentRook)) {
-            const goToColor = canGoToPrev.childNodes[0].id.match(/[black|white]+/g)[0]
-            if (goToColor === currentRookColor) {
-              stuckBack = true
+        if (canGoToPrev !== null) {
+          if (canGoToPrev.childNodes.length !== 0) {
+            if (canGoToPrev.childNodes[0] !== document.getElementById(currentRook)) {
+              const goToColor = canGoToPrev.childNodes[0].id.match(/[black|white]+/g)[0]
+              if (goToColor === currentRookColor) {
+                stuckBack = true
+              }
             }
           }
         }
+
 
         if (stuckFront && stuckBack) {
           break
@@ -716,18 +746,23 @@ export default {
             canGoTo.classList.remove("walkColor");
             if (goToColor !== currentRookColor) {
               canGoTo.classList.add("attackColor");
+              const maxMoveToCopy = maxMoveTo
+              canGoTo.addEventListener("click", () => {
+                this.attackRook(targeted, maxMoveToCopy)
+              })
             }
-          } else {
-            console.log("goofed")
           }
 
           if (!bottomEmpty) {
             canGoTo.classList.remove("walkColor");
             if (goToColor !== currentRookColor) {
               canGoTo.classList.add("attackColor");
+              const maxMoveToCopy = maxMoveTo
+              canGoTo.addEventListener("click", (e) => {
+                this.attackRook(e, maxMoveToCopy)
+              })
             }
           }
-          // console.log('TopMax ', topMax, 'bottomMax', bottomMax, 'topEmpty', topEmpty, 'bottomEmpty', bottomEmpty, 'can go to ', canGoTo, 'can go to child', canGoTo.childNodes)
         }
       }
 
@@ -778,6 +813,7 @@ export default {
               canGoTo.classList.add("attackColor");
             }
           }
+          console.log(leftEmpty)
           if (!rightEmpty) {
             canGoTo.classList.remove("walkColor");
             if (goToColor !== currentRookColor) {

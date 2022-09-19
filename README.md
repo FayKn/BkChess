@@ -7,6 +7,7 @@ The differences between this and normal chess are:
 - King and queen need to be captured to win (a country can still function with only one monarch)
 - Castling is not allowed (it's dumb.)
 - Knights are brutes
+- Everything can kill eachother
 - Brutes move 2 steps in a cross and kill everything in their path including thier own team
 
 ![Brute movement](bruteMovement.png)
@@ -19,7 +20,7 @@ The differences between this and normal chess are:
 The code is a mess right now and I should maybe fix it sometime...
 
 Progress so far:
-- [ ] Turns
+- [x] Turns
 - [x] Board made
 - [ ] Checkmate https://www.chess.com/terms/checkmate-chess
 
