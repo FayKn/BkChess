@@ -9,12 +9,12 @@
             <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
           </div>
           <div id="a2" class="boardItemSize bg-blue-800">
-
+            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="a3" class="boardItemSize bg-blue-400">
           </div>
           <div id="a4" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
+
           </div>
           <div id="a5" class="boardItemSize bg-blue-400">
           </div>
@@ -32,13 +32,13 @@
             <img id="blackHorseL" class="w-[70%] invert" src="pieces/brute.png"/>
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
-
+            <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="b3" class="boardItemSize bg-blue-800">
 
           </div>
           <div id="b4" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="b5" class="boardItemSize bg-blue-800">
 
@@ -59,11 +59,12 @@
             <img id="blackBitchshopL" class="w-[50%]" src="pieces/bitchshop.svg"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
+
           </div>
           <div id="c3" class="boardItemSize bg-blue-400">
           </div>
           <div id="c4" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
+
           </div>
           <div id="c5" class="boardItemSize bg-blue-400">
 
@@ -138,12 +139,12 @@
             <img id="blackBitchshopR" class="w-[50%]" src="pieces/bitchshop.svg"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
+            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="f3" class="boardItemSize bg-blue-800">
 
           </div>
           <div id="f4" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
 
           </div>
           <div id="f5" class="boardItemSize bg-blue-800">
@@ -726,19 +727,67 @@ export default {
           canGoTo.classList.remove("walkColor");
           if (goToColor !== currentRookColor) {
             verticalAttackables.push(canGoTo.id)
-
+/*
             canGoTo.classList.add("attackColor");
             const maxMoveToCopy = loopProgressionId
             canGoTo.addEventListener("click", () => {
               this.attackRook(targeted, maxMoveToCopy)
-            })
+            })*/
           }
         }
       }
 
 
       if(verticalAttackables !== []){
-        console.log(verticalAttackables)
+        //Make the values only an array of numbers
+        let verticalAttackablesNum = verticalAttackables.map((value) => {
+          return parseInt(value.slice(1))
+        })
+
+        console.log("All nums",verticalAttackablesNum)
+
+        // Find out which numbers are smaller then the current number
+        let smallerNums = verticalAttackablesNum.filter((value) => {
+          return value < standingOnNum
+        })
+
+        console.log("Smaller: ", smallerNums)
+
+
+        // Find out which numbers are larger then the current number
+        let largerNums = verticalAttackablesNum.filter((value) => {
+          return value > standingOnNum
+        })
+
+        console.log("Larger: ", largerNums)
+
+        let topNum = Math.max(...smallerNums)
+        let bottomNum = Math.min(...largerNums)
+
+        console.log("Top num: ", topNum)
+        console.log("Bottom num: ", bottomNum)
+
+        if(topNum !== Infinity){
+          let topNumId = standingOnLett + topNum
+
+          console.log(topNumId)
+          let topNumIdElement = document.getElementById(topNumId)
+          topNumIdElement.classList.add("attackColor")
+          topNumIdElement.addEventListener("click", () => {
+            this.attackRook(targeted, topNumId)
+          })
+        }
+
+        if(bottomNum !== Infinity){
+          let bottomNumId = standingOnLett + bottomNum
+          let bottomNumIdElement = document.getElementById(bottomNumId)
+          bottomNumIdElement.classList.add("attackColor")
+          bottomNumIdElement.addEventListener("click", () => {
+            this.attackRook(targeted, bottomNumId)
+          })
+        }
+        
+
       }
 
 
@@ -790,15 +839,6 @@ export default {
         })
 
         const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
-
-        /*        const closestLettIndexL = horizonalAttackablesLettIndex.reduce(function (prev, curr) {
-                  return (Math.abs(curr - standingOnLettIndex) < Math.abs(prev - standingOnLettIndex) ? curr : prev);
-                });
-
-                // parse that index to get the letter
-                const closestLetterL = this.alphabet[closestLettIndexL]
-
-                console.log(closestLetterL)*/
 
         // Find the letters closest to the rook
         // Filter out all letters larger then the current letter
