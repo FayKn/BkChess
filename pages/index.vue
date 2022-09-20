@@ -13,7 +13,8 @@
           </div>
           <div id="a3" class="boardItemSize bg-blue-400">
           </div>
-          <div id="a4" class="boardItemSize bg-blue-800">            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
+          <div id="a4" class="boardItemSize bg-blue-800">
+            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="a5" class="boardItemSize bg-blue-400">
           </div>
@@ -137,12 +138,12 @@
             <img id="blackBitchshopR" class="w-[50%]" src="pieces/bitchshop.svg"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="f3" class="boardItemSize bg-blue-800">
 
           </div>
           <div id="f4" class="boardItemSize bg-blue-400">
+            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
 
           </div>
           <div id="f5" class="boardItemSize bg-blue-800">
@@ -170,7 +171,6 @@
 
           </div>
           <div id="g4" class="boardItemSize bg-blue-800">
-
           </div>
           <div id="g5" class="boardItemSize bg-blue-400">
 
@@ -191,7 +191,7 @@
             <img @click="decideMoveRook($event)" id="blackRookR" src="pieces/rook.svg"/>
           </div>
           <div id="h2" class="boardItemSize bg-blue-400">
-          <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="h3" class="boardItemSize bg-blue-800">
 
@@ -208,7 +208,7 @@
             <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="h8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="whiteRookR" class="invert" src="pieces/rook.svg"/>
           </div>
         </div>
       </div>
@@ -652,6 +652,8 @@ export default {
       let loopProgressionId
       let topMax
       let bottomMax
+
+      let verticalAttackables = []
       for (let i = 1; i < 9; i++) {
         let topEmpty = false
         let bottomEmpty = false
@@ -721,28 +723,22 @@ export default {
 
         if ((topMax !== undefined || bottomMax !== undefined) && canGoTo.childNodes.length > 0) {
           const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
-          if (!topEmpty) {
-            canGoTo.classList.remove("walkColor");
-            if (goToColor !== currentRookColor) {
-              canGoTo.classList.add("attackColor");
-              const maxMoveToCopy = loopProgressionId
-              canGoTo.addEventListener("click", () => {
-                this.attackRook(targeted, maxMoveToCopy)
-              })
-            }
-          }
+          canGoTo.classList.remove("walkColor");
+          if (goToColor !== currentRookColor) {
+            verticalAttackables.push(canGoTo.id)
 
-          if (!bottomEmpty) {
-            canGoTo.classList.remove("walkColor");
-            if (goToColor !== currentRookColor) {
-              canGoTo.classList.add("attackColor");
-              const maxMoveToCopy = loopProgressionId
-              canGoTo.addEventListener("click", (e) => {
-                this.attackRook(e, maxMoveToCopy)
-              })
-            }
+            canGoTo.classList.add("attackColor");
+            const maxMoveToCopy = loopProgressionId
+            canGoTo.addEventListener("click", () => {
+              this.attackRook(targeted, maxMoveToCopy)
+            })
           }
         }
+      }
+
+
+      if(verticalAttackables !== []){
+        console.log(verticalAttackables)
       }
 
 
@@ -762,10 +758,14 @@ export default {
           // Make a copy of the square id to use in function because it gets redefined every loop and this works
           const maxMoveToCopy = loopProgressionId
 
+          const self = this
+
+          const _handler = function () {
+            self.walkRook(targeted, maxMoveToCopy);
+          };
+
           // Add event listener to the square
-          canGoTo.addEventListener("click", () => {
-            this.walkRook(targeted, maxMoveToCopy);
-          })
+          canGoTo.addEventListener("click", _handler);
 
         }
         // Make sure the square is not empty
@@ -773,29 +773,12 @@ export default {
           const goToColor = canGoTo.childNodes[0].id.match(/[black|white]+/g)[0]
           // Check if the square is not own team (and by extent self)
           if (goToColor !== currentRookColor) {
-            // Remove the possibly set walk color and add attack color
-/*            canGoTo.classList.remove("walkColor");
-            canGoTo.classList.add("attackColor");*/
-
             horizonalAttackables.push(canGoTo)
-
-
-/*
-            // Add event listiner to square to attack
-            const maxMoveToCopy = loopProgressionId
-            canGoTo.addEventListener("click", () => {
-              this.attackRook(targeted, maxMoveToCopy)
-            })*/
           }
         }
       }
 
       if (horizonalAttackables !== []) {
-        horizonalAttackables.forEach((square) => {
-          square.classList.remove("walkColor");
-          square.classList.add("attackColor");
-        })
-
         // strip the first character of every value in the array and put it in another array
         let horizonalAttackablesLett = horizonalAttackables.map((square) => {
           return square.id.slice(0, 1)
@@ -808,16 +791,16 @@ export default {
 
         const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
 
-/*        const closestLettIndexL = horizonalAttackablesLettIndex.reduce(function (prev, curr) {
-          return (Math.abs(curr - standingOnLettIndex) < Math.abs(prev - standingOnLettIndex) ? curr : prev);
-        });
+        /*        const closestLettIndexL = horizonalAttackablesLettIndex.reduce(function (prev, curr) {
+                  return (Math.abs(curr - standingOnLettIndex) < Math.abs(prev - standingOnLettIndex) ? curr : prev);
+                });
 
-        // parse that index to get the letter
-        const closestLetterL = this.alphabet[closestLettIndexL]
+                // parse that index to get the letter
+                const closestLetterL = this.alphabet[closestLettIndexL]
 
-        console.log(closestLetterL)*/
+                console.log(closestLetterL)*/
 
-      // Find the letters closest to the rook
+        // Find the letters closest to the rook
         // Filter out all letters larger then the current letter
         const horizonalAttackablesLettIndexSmaller = horizonalAttackablesLettIndex.filter((letter) => {
           return letter < standingOnLettIndex
@@ -825,31 +808,85 @@ export default {
 
         // TODO: do check similar to ln.836
 
-        // Find index of the closest letter
-        const closestLettIndexL = horizonalAttackablesLettIndexSmaller.reduce(function (prev, curr) {
-          return (Math.abs(curr - standingOnLettIndex) < Math.abs(prev - standingOnLettIndex) ? curr : prev);
-        });
+        let closestLetterL
+        let closestLettIndexL
 
-        // parse that index to get the letter
-        const closestLetterL = this.alphabet[closestLettIndexL]
+        if (horizonalAttackablesLettIndexSmaller.length > 0) {
+          // Find index of the closest letter
+          closestLettIndexL = horizonalAttackablesLettIndexSmaller.reduce(function (prev, curr) {
+            return (Math.abs(curr - standingOnLettIndex) < Math.abs(prev - standingOnLettIndex) ? curr : prev);
+          });
 
-        if(horizonalAttackablesLettIndexSmaller.length !== horizonalAttackables.length) {
+          // parse that index to get the letter
+          closestLetterL = this.alphabet[closestLettIndexL]
+        }
+
+        let closestLetterR
+        let closestLettIndexR
+        if (horizonalAttackablesLettIndexSmaller.length !== horizonalAttackables.length) {
           // Filter out all letters smaller then the current letter
           const horizonalAttackablesLettIndexLarger = horizonalAttackablesLettIndex.filter((letter) => {
             return letter > standingOnLettIndex
           })
 
           // Find index of the closest letter
-          const closestLettIndexR = horizonalAttackablesLettIndexLarger.reduce(function (prev, curr) {
+          closestLettIndexR = horizonalAttackablesLettIndexLarger.reduce(function (prev, curr) {
             return (Math.abs(curr - standingOnLettIndex) < Math.abs(prev - standingOnLettIndex) ? curr : prev);
           });
 
           // parse that index to get the letter
-          const closestLetterR = this.alphabet[closestLettIndexR]
+          closestLetterR = this.alphabet[closestLettIndexR]
         }
 
 
-        console.log(closestLetterL)
+        if (closestLetterL !== undefined) {
+          let canGoTo = document.getElementById(closestLetterL + standingOnNum)
+          canGoTo.classList.remove("walkColor");
+          canGoTo.classList.add("attackColor");
+          const maxMoveToCopy = closestLetterL + standingOnNum
+          canGoTo.addEventListener("click", () => {
+            this.attackRook(targeted, maxMoveToCopy)
+          })
+        }
+
+        if (closestLetterR !== undefined) {
+          let canGoTo = document.getElementById(closestLetterR + standingOnNum)
+          canGoTo.classList.remove("walkColor");
+          canGoTo.classList.add("attackColor");
+          const maxMoveToCopy = closestLetterR + standingOnNum
+          canGoTo.addEventListener("click", () => {
+            this.attackRook(targeted, maxMoveToCopy)
+          })
+        }
+
+
+        // Remove the walks after the attackable rooks
+        if ((closestLettIndexR + 1) < this.alphabet.length) {
+          const timesToLoop = this.alphabet.length - (closestLettIndexR + 1)
+          for (let i = 0; i < timesToLoop; i++) {
+            let removeable = document.getElementById(this.alphabet[closestLettIndexR + i + 1] + standingOnNum)
+            removeable.classList.remove("walkColor");
+
+            // Clone node and replace to remove event listener
+            const removeableClone = removeable.cloneNode(true)
+            removeable.parentNode.replaceChild(removeableClone, removeable)
+          }
+        }
+
+        // Remove the walks after the attackable rooks
+        if ((closestLettIndexL - 1) < this.alphabet.length) {
+          const timesToLoop = this.alphabet.length - (closestLettIndexL + 1)
+          for (let i = 0; i < timesToLoop; i++) {
+            let removeable = document.getElementById(this.alphabet[closestLettIndexL - i - 1] + standingOnNum)
+            removeable.classList.remove("walkColor");
+
+            // Clone node and replace to remove event listener
+            const removeableClone = removeable.cloneNode(true)
+            removeable.parentNode.replaceChild(removeableClone, removeable)
+          }
+        }
+
+
       }
 
     },
