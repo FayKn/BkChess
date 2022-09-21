@@ -1,7 +1,7 @@
 <template>
-  <div id="wrapper">
-    <h1 class="text-white">{{ turn }}</h1>
-    <div id="board">
+  <div id="wrapper" class="flex justify-center content-center flex-col">
+    <h1 class="text-white text-center">{{ turn }}</h1>
+    <div id="board" class="flex justify-center">
       <div class="flex flex-row select-none">
         <!--row 1 -->
         <div id="a">
@@ -24,7 +24,7 @@
             <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="a8" class="boardItemSize bg-blue-800">
-
+            <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
           </div>
         </div>
         <!--row 2 -->
@@ -56,7 +56,7 @@
         <!--row 3 -->
         <div id="c">
           <div id="c1" class="boardItemSize bg-blue-400">
-            <img id="blackBitchshopL" class="w-[50%]" src="pieces/bitchshop.svg"/>
+            <img id="blackClownL" class="w-[50%] invert" src="pieces/clown.png"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -64,18 +64,17 @@
           <div id="c3" class="boardItemSize bg-blue-400">
           </div>
           <div id="c4" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
           </div>
           <div id="c5" class="boardItemSize bg-blue-400">
 
           </div>
           <div id="c6" class="boardItemSize bg-blue-800">
-          <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="c7" class="boardItemSize bg-blue-400">
+            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="c8" class="boardItemSize bg-blue-800">
-            <img id="whiteBitchshopL" class="w-[50%] invert" src="pieces/bitchshop.svg"/>
+            <img id="whiteClownL" class="w-[50%]" src="pieces/clown.png"/>
           </div>
         </div>
         <!--row 4 -->
@@ -135,7 +134,7 @@
         <!--row 6 -->
         <div id="f">
           <div id="f1" class="boardItemSize bg-blue-800">
-            <img id="blackBitchshopR" class="w-[50%]" src="pieces/bitchshop.svg"/>
+            <img id="blackPawnR" class="w-[50%] invert" src="pieces/clown.png"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -156,7 +155,7 @@
             <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="f8" class="boardItemSize bg-blue-400">
-            <img id="whiteBitchshopR" class="w-[50%] invert" src="pieces/bitchshop.svg"/>
+            <img id="whiteKnightR" class="w-[50%]" src="pieces/clown.png"/>
           </div>
         </div>
         <!--row 7 -->
