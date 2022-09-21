@@ -4,18 +4,24 @@ In this project I want to attemt to make Chess easier to learn and also less bor
 white making it more "realistic" by applying logic
 
 The differences between this and normal chess are:
-- King and queen need to be captured to win (a country can still function with only one monarch)
-- Castling is not allowed (it's dumb.)
+- King and queen need to be captured to win (a country can still function with only one monarch and gender equality)
+- Castling is not allowed (it's dumb, I don't understand it so it's clearly not easy /s)
 - Knights are brutes
-- Everything can kill eachother
 - Brutes move 2 steps in a cross and kill everything in their path including thier own team
 
 ![Brute movement](bruteMovement.png)
 
 - Enpessant is not allowed
-- Promotion is not allowed this leaves pawn stranded and unable to move as a kind of meat shield, brutes need to clear the way if you want them gone
 
-- The bichop has an AOE distraction effect, the blocks around is are confused and won't be able to move except for the king because he's based
+
+
+- Promotion is not allowed this leaves pawn stranded and unable to move as a kind of meat shield, brutes would be best to clear the way if you want them gone
+
+
+- The bichop aka clown has an AOE distraction effect, the blocks in front of it is are confused and won't be able to move except for the king because he's based. 
+Can walk 1 step each direction
+  ![clown movement](clownMovement.png)
+- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepid, when she dies skip 2 turns
 
 The code is a mess right now and I should maybe fix it sometime...
 
@@ -27,7 +33,6 @@ Progress so far:
 - Pawns
 - [x] Pawns move
 - [x] Pawns stop when they should
-- 
 - [x] Pawns attack
 
 - Brutes
@@ -40,18 +45,19 @@ Progress so far:
 - [ ] Bishops attack
 
 - Rooks
-- [ ] Rooks move
-- [ ] Rooks attack
+- [X] Rooks move
+- [X] Rooks attack
 
 - Queens
 - [ ] Queens move
 - [ ] Queens attack
+- [ ] Turns skip at death
 
 - Kings
 - [ ] Kings move
 - [ ] Kings attack
 
-- Advanced stuff/rules:
+- Advanced stuff/rules (might make, might not):
 - [ ] Check prevent walking into check https://www.chess.com/terms/check-chess  
 - [ ] Stalemate  https://www.chess.com/terms/stalemate-chess
 

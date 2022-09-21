@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper" class="flex justify-center content-center flex-col">
-    <h1 class="text-white text-center">{{ turn }}</h1>
+    <h1 class="text-white text-center">It's now: <span class="bold text-3xl">{{ turn }}</span> 's turn</h1>
     <div id="board" class="flex justify-center">
       <div class="flex flex-row select-none">
         <!--row 1 -->
