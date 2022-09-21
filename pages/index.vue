@@ -235,9 +235,9 @@ export default {
       if (switchColor) {
         if (this.turn === "white") {
           // TODO: change back to black
-          this.turn = "white"
+          this.turn = "black"
         } else {
-          this.turn = "white"
+          this.turn = "black"
         }
       }
       else{
@@ -688,7 +688,7 @@ export default {
               upPosSelected.addEventListener("click", _listener);
             }
             else if(upPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
-              verticalAttackables.push(upPosSelected.id)
+              verticalAttackables.push(upPosSelected)
               break
             }
             else {
@@ -697,7 +697,7 @@ export default {
           }
         }
         if(!stuckDownPre){
-          for (let i = standingOnNum+1; i < 8; i++) {
+          for (let i = standingOnNum+1; i < 9; i++) {
             const downPos = standingOnLett + i
 
 
@@ -715,7 +715,7 @@ export default {
               downPosSelected.addEventListener("click", _listener);
             }
             else if(downPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
-              verticalAttackables.push(downPosSelected.id)
+              verticalAttackables.push(downPosSelected)
               break
             }
             else {
@@ -727,7 +727,7 @@ export default {
         if (verticalAttackables !== []) {
           //Make the values only an array of numbers
           let verticalAttackablesNum = verticalAttackables.map((value) => {
-            return parseInt(value.slice(1))
+            return parseInt(value.id.slice(1))
           })
 
           // Find out which numbers are smaller then the current number
@@ -762,34 +762,6 @@ export default {
               this.attackRook(targeted, bottomNumId)
             })
           }
-
-
-          // Remove the walks after the attackable rooks from top
-          if (topNum - 8 < 0 && (topNum !== Number.NEGATIVE_INFINITY && topNum !== Infinity)) {
-            const timesToLoop = topNum - 1
-            for (let i = 0; i < timesToLoop; i++) {
-              let removeable = document.getElementById(standingOnLett + (topNum - i - 1))
-              removeable.classList.remove("walkColor");
-
-              // Clone node and replace to remove event listener
-              const removeableClone = removeable.cloneNode(true)
-              removeable.parentNode.replaceChild(removeableClone, removeable)
-            }
-          }
-          // Remove the walks after the attackable rooks from bottom
-          if (bottomNum - 8 < 0) {
-            const timesToLoop = 8 - bottomNum + 1
-            for (let i = 0; i < timesToLoop; i++) {
-              let removeable = document.getElementById(standingOnLett + (bottomNum + i))
-              removeable.classList.remove("walkColor");
-
-              // Clone node and replace to remove event listener
-              const removeableClone = removeable.cloneNode(true)
-              removeable.parentNode.replaceChild(removeableClone, removeable)
-            }
-          }
-
-
         }
 
 
@@ -826,7 +798,6 @@ export default {
 
           const leftPosSelected = document.getElementById(leftPos)
 
-          console.log(leftPosSelected, curLettIndex)
 
           if(leftPosSelected.childNodes.length === 0){
             leftPosSelected.classList.add("walkColor");
@@ -841,7 +812,6 @@ export default {
           }
           else if(leftPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
             horizonalAttackables.push(leftPosSelected)
-            console.log(horizonalAttackables)
             break
           }
           else {
