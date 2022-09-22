@@ -6,7 +6,7 @@
         <!--row 1 -->
         <div id="a">
           <div id="a1" class="boardItemSize bg-blue-400">
-          <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
           </div>
           <div id="a2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -30,7 +30,7 @@
         <!--row 2 -->
         <div id="b">
           <div id="b1" class="boardItemSize bg-blue-800">
-            <img id="blackHorseL" class="w-[70%] invert" src="pieces/brute.png"/>
+
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -50,7 +50,7 @@
             <img @click="decideMovePawn($event)" id="whitePawn2" class="invert w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="b8" class="boardItemSize bg-blue-400">
-            <img id="whiteHorseL" class="w-[70%]" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" src="pieces/brute.png"/>
           </div>
         </div>
         <!--row 3 -->
@@ -86,7 +86,7 @@
             <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="d3" class="boardItemSize bg-blue-800">
-
+            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" src="pieces/brute.png"/>
           </div>
           <div id="d4" class="boardItemSize bg-blue-400">
 
@@ -161,7 +161,7 @@
         <!--row 7 -->
         <div id="g">
           <div id="g1" class="boardItemSize bg-blue-400">
-            <img id="blackHorseR" class="w-[70%] invert" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" src="pieces/brute.png"/>
           </div>
           <div id="g2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -181,7 +181,7 @@
             <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="g8" class="boardItemSize bg-blue-800">
-            <img id="whiteHorseR" class="w-[70%]" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" src="pieces/brute.png"/>
           </div>
         </div>
         <!--row 8 -->
@@ -230,6 +230,7 @@ export default {
     }
   },
   methods: {
+    // Universal functions
     switchTurn(switchColor = true) {
       if (switchColor) {
         if (this.turn === "white") {
@@ -238,8 +239,7 @@ export default {
         } else {
           this.turn = "black"
         }
-      }
-      else{
+      } else {
         console.log("not switching turn")
       }
       // Remove all the walk or attack classes
@@ -285,8 +285,28 @@ export default {
           this.decideMoveRook(e)
         })
       }
+
+      const bruteToSelectL = this.turn + "BruteL"
+      const bruteToSelectR = this.turn + "BruteR"
+
+      const bruteSelectedL = document.getElementById(bruteToSelectL)
+      const bruteSelectedR = document.getElementById(bruteToSelectR)
+
+      if (bruteSelectedL) {
+        bruteSelectedL.addEventListener("click", (e) => {
+          this.decideMoveBrute(e)
+        })
+      }
+      if (bruteSelectedR) {
+        bruteSelectedR.addEventListener("click", (e) => {
+          this.decideMoveBrute(e)
+        })
+      }
+
     },
 
+
+    // Pawn move set
     walkPawn(targeted, moveTo) {
       let currentPawn
 
@@ -580,6 +600,8 @@ export default {
       }
     },
 
+
+    // Rook move set
     walkRook(targeted, moveTo) {
       let currentRook
 
@@ -634,7 +656,6 @@ export default {
     },
 
     decideMoveRook(targeted) {
-
       // Get block pawn is standing on
       let standingOn
       // Get current pawn in (white/black)Rook(R/L) format
@@ -655,117 +676,109 @@ export default {
       let stuckUpPre = false
       const rookUp = document.getElementById(standingOnLett + (standingOnNum - 1))
 
-      if(rookUp === null || (rookUp.childNodes.length > 0 && rookUp.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
+      if (rookUp === null || (rookUp.childNodes.length > 0 && rookUp.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
         stuckUpPre = true
       }
 
       const rookDown = document.getElementById(standingOnLett + (standingOnNum + 1))
       let stuckDownPre = false
 
-      if(rookDown === null || (rookDown.childNodes.length > 0 && rookDown.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
+      if (rookDown === null || (rookDown.childNodes.length > 0 && rookDown.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
         stuckDownPre = true
       }
 
 
       // Check if the rook if stuck up or down to prevent it from going through the loop
-        if(!stuckUpPre){
-          for (let i = 1; i < standingOnNum; i++) {
-            const upPosNum = standingOnNum - i
-            const upPos = standingOnLett + upPosNum
+      if (!stuckUpPre) {
+        for (let i = 1; i < standingOnNum; i++) {
+          const upPosNum = standingOnNum - i
+          const upPos = standingOnLett + upPosNum
 
-            const upPosSelected = document.getElementById(upPos)
+          const upPosSelected = document.getElementById(upPos)
 
-            if(upPosSelected.childNodes.length === 0){
-              upPosSelected.classList.add("walkColor");
-              const self = this
-              const upPosCopy = upPos
+          if (upPosSelected.childNodes.length === 0) {
+            upPosSelected.classList.add("walkColor");
+            const self = this
+            const upPosCopy = upPos
 
-              const _listener = function () {
-                self.walkRook(targeted, upPosCopy);
-              };
+            const _listener = function () {
+              self.walkRook(targeted, upPosCopy);
+            };
 
-              upPosSelected.addEventListener("click", _listener);
-            }
-            else if(upPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
-              verticalAttackables.push(upPosSelected)
-              break
-            }
-            else {
-              break
-            }
+            upPosSelected.addEventListener("click", _listener);
+          } else if (upPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
+            verticalAttackables.push(upPosSelected)
+            break
+          } else {
+            break
           }
         }
-        if(!stuckDownPre){
-          for (let i = standingOnNum+1; i < 9; i++) {
-            const downPos = standingOnLett + i
+      }
+      if (!stuckDownPre) {
+        for (let i = standingOnNum + 1; i < 9; i++) {
+          const downPos = standingOnLett + i
 
 
-            const downPosSelected = document.getElementById(downPos)
+          const downPosSelected = document.getElementById(downPos)
 
-            if(downPosSelected.childNodes.length === 0){
-              downPosSelected.classList.add("walkColor");
-              const self = this
-              const upPosCopy = downPos
+          if (downPosSelected.childNodes.length === 0) {
+            downPosSelected.classList.add("walkColor");
+            const self = this
+            const upPosCopy = downPos
 
-              const _listener = function () {
-                self.walkRook(targeted, upPosCopy);
-              };
+            const _listener = function () {
+              self.walkRook(targeted, upPosCopy);
+            };
 
-              downPosSelected.addEventListener("click", _listener);
-            }
-            else if(downPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
-              verticalAttackables.push(downPosSelected)
-              break
-            }
-            else {
-              break
-            }
+            downPosSelected.addEventListener("click", _listener);
+          } else if (downPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
+            verticalAttackables.push(downPosSelected)
+            break
+          } else {
+            break
           }
         }
+      }
 
-        if (verticalAttackables !== []) {
-          //Make the values only an array of numbers
-          let verticalAttackablesNum = verticalAttackables.map((value) => {
-            return parseInt(value.id.slice(1))
+      if (verticalAttackables !== []) {
+        //Make the values only an array of numbers
+        let verticalAttackablesNum = verticalAttackables.map((value) => {
+          return parseInt(value.id.slice(1))
+        })
+
+        // Find out which numbers are smaller then the current number
+        let smallerNums = verticalAttackablesNum.filter((value) => {
+          return value < standingOnNum
+        })
+
+
+        // Find out which numbers are larger then the current number
+        let largerNums = verticalAttackablesNum.filter((value) => {
+          return value > standingOnNum
+        })
+
+        let topNum = Math.max(...smallerNums)
+        let bottomNum = Math.min(...largerNums)
+
+        if (topNum !== Number.NEGATIVE_INFINITY && topNum !== Infinity) {
+          let topNumId = standingOnLett + topNum
+
+          let topNumIdElement = document.getElementById(topNumId)
+          topNumIdElement.classList.add("attackColor")
+          topNumIdElement.addEventListener("click", () => {
+            this.attackRook(targeted, topNumId)
           })
-
-          // Find out which numbers are smaller then the current number
-          let smallerNums = verticalAttackablesNum.filter((value) => {
-            return value < standingOnNum
-          })
-
-
-          // Find out which numbers are larger then the current number
-          let largerNums = verticalAttackablesNum.filter((value) => {
-            return value > standingOnNum
-          })
-
-          let topNum = Math.max(...smallerNums)
-          let bottomNum = Math.min(...largerNums)
-
-          if (topNum !== Number.NEGATIVE_INFINITY && topNum !== Infinity) {
-            let topNumId = standingOnLett + topNum
-
-            let topNumIdElement = document.getElementById(topNumId)
-            topNumIdElement.classList.add("attackColor")
-            topNumIdElement.addEventListener("click", () => {
-              this.attackRook(targeted, topNumId)
-            })
-          }
-
-          if (bottomNum !== Infinity) {
-            let bottomNumId = standingOnLett + bottomNum
-            let bottomNumIdElement = document.getElementById(bottomNumId)
-            bottomNumIdElement.classList.add("attackColor")
-            bottomNumIdElement.addEventListener("click", () => {
-              this.attackRook(targeted, bottomNumId)
-            })
-          }
         }
 
-
-
-
+        if (bottomNum !== Infinity) {
+          let bottomNumId = standingOnLett + bottomNum
+          let bottomNumIdElement = document.getElementById(bottomNumId)
+          bottomNumIdElement.classList.add("attackColor")
+          bottomNumIdElement.addEventListener("click", () => {
+            this.attackRook(targeted, bottomNumId)
+          })
+        }
+      }
 
 
       // Horinzontal movement
@@ -775,30 +788,30 @@ export default {
 
       const curLettIndex = this.alphabet.indexOf(standingOnLett)
 
-      const rookLeft = this.alphabet[curLettIndex-1] + standingOnNum
+      const rookLeft = this.alphabet[curLettIndex - 1] + standingOnNum
       const rookLeftElement = document.getElementById(rookLeft)
 
-      if(curLettIndex === 0 || (rookLeftElement.childNodes.length > 0 && rookLeftElement.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
+      if (curLettIndex === 0 || (rookLeftElement.childNodes.length > 0 && rookLeftElement.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
         stuckLeftPre = true
       }
 
       let stuckRightPre = false
-      const rookRight = this.alphabet[curLettIndex+1] + standingOnNum
+      const rookRight = this.alphabet[curLettIndex + 1] + standingOnNum
 
       const rookRightElement = document.getElementById(rookRight)
 
-      if(curLettIndex === 7 || (rookRightElement.childNodes.length > 0 && rookRightElement.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
+      if (curLettIndex === 7 || (rookRightElement.childNodes.length > 0 && rookRightElement.childNodes[0].id.match(/[black|white]+/g)[0] === currentRookColor)) {
         stuckRightPre = true
       }
 
-      if(!stuckLeftPre){
+      if (!stuckLeftPre) {
         for (let i = 0; i < curLettIndex; i++) {
-          const leftPos = this.alphabet[curLettIndex-(i+1)] + standingOnNum
+          const leftPos = this.alphabet[curLettIndex - (i + 1)] + standingOnNum
 
           const leftPosSelected = document.getElementById(leftPos)
 
 
-          if(leftPosSelected.childNodes.length === 0){
+          if (leftPosSelected.childNodes.length === 0) {
             leftPosSelected.classList.add("walkColor");
             const self = this
             const leftPosCopy = leftPos
@@ -808,24 +821,22 @@ export default {
             };
 
             leftPosSelected.addEventListener("click", _listener);
-          }
-          else if(leftPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
+          } else if (leftPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
             horizonalAttackables.push(leftPosSelected)
             break
-          }
-          else {
+          } else {
             break
           }
         }
       }
 
-      if(!stuckRightPre){
-        for (let i = curLettIndex+1; i < 8; i++) {
+      if (!stuckRightPre) {
+        for (let i = curLettIndex + 1; i < 8; i++) {
           const rightPos = this.alphabet[i] + standingOnNum
 
           const rightPosSelected = document.getElementById(rightPos)
 
-          if(rightPosSelected.childNodes.length === 0){
+          if (rightPosSelected.childNodes.length === 0) {
             rightPosSelected.classList.add("walkColor");
             const self = this
             const rightPosCopy = rightPos
@@ -835,12 +846,10 @@ export default {
             };
 
             rightPosSelected.addEventListener("click", _listener);
-          }
-          else if(rightPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
+          } else if (rightPosSelected.childNodes[0].id.match(/[black|white]+/g)[0] !== currentRookColor) {
             horizonalAttackables.push(rightPosSelected)
             break
-          }
-          else {
+          } else {
             break
           }
         }
@@ -917,6 +926,99 @@ export default {
         }
       }
 
+    },
+
+
+    // Brute move set
+    decideMoveBrute(targeted){
+      // Get block pawn is standing on
+      const standingOn =targeted.target.parentElement.id;
+      // Get current pawn in (white/black)Brute(R/L) format
+      const currentBrute = targeted.target.id;
+
+      // get only number of the square the pawn is standing on
+      const standingOnNum = parseInt(standingOn.slice(1))
+
+      // get the letter of the square the pawn is standing on
+      const standingOnLett = standingOn.slice(0, 1);
+      const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
+
+      const currentBruteColor = currentBrute.match(/[black|white]+/)[0];
+
+      const stuckUp = (standingOnNum-2) <= 0
+      const stuckDown = (standingOnNum+2) >= 8
+      const stuckLeft = (standingOnLettIndex-2) < 0
+      const stuckRight = (standingOnLettIndex+2) > 7
+
+
+
+      function addAttackables(self,firstAttack, secondAttack){
+        const firstAttackSelected = document.getElementById(firstAttack)
+        const secondAttackSelected = document.getElementById(secondAttack)
+
+        console.log(firstAttack, secondAttack)
+
+        firstAttackSelected.classList.add("attackColor")
+        secondAttackSelected.classList.add("attackColor")
+
+        const _function = function(){
+          self.bruteMovement(targeted.target ,firstAttackSelected, secondAttackSelected)
+        }
+
+        firstAttackSelected.addEventListener("click", _function)
+        secondAttackSelected.addEventListener("click", _function)
+      }
+
+      if(!stuckUp){
+        const firstAttack =  standingOnLett+(standingOnNum-1)
+        const secondAttack = standingOnLett+(standingOnNum-2)
+
+        addAttackables(this ,firstAttack, secondAttack)
+      }
+
+      if(!stuckDown){
+        const firstAttack =  standingOnLett+(standingOnNum+1)
+        const secondAttack = standingOnLett+(standingOnNum+2)
+
+        addAttackables(this, firstAttack, secondAttack)
+      }
+
+      if(!stuckLeft){
+        const firstAttack = this.alphabet[standingOnLettIndex-1] + standingOnNum
+        const secondAttack = this.alphabet[standingOnLettIndex-2] + standingOnNum
+
+        addAttackables(this, firstAttack, secondAttack)
+      }
+
+      if(!stuckRight){
+        const firstAttack = this.alphabet[standingOnLettIndex+1] + standingOnNum
+        const secondAttack = this.alphabet[standingOnLettIndex+2] + standingOnNum
+
+        addAttackables(this, firstAttack, secondAttack)
+      }
+    },
+
+    bruteMovement(currentBrute ,firstVictim, secondVictim){
+
+      // Haal alle kiddo's weg
+      while (firstVictim.firstChild) {
+        firstVictim.removeChild(firstVictim.lastChild);
+      }
+
+      while (secondVictim.firstChild) {
+        secondVictim.removeChild(secondVictim.lastChild);
+      }
+
+      const bruteClone = currentBrute.cloneNode()
+
+      // haal de brute weg
+      currentBrute.remove()
+
+      // plak hem weer terug op z'n nieuwe plek
+      secondVictim.appendChild(bruteClone)
+
+      // Haal de classes weg en wissel de beurt
+      this.switchTurn()
     },
   }
 }

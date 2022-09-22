@@ -7,7 +7,7 @@ The differences between this and normal chess are:
 - King and queen need to be captured to win (a country can still function with only one monarch and gender equality)
 - Castling is not allowed (it's dumb, I don't understand it so it's clearly not easy /s)
 - Knights are brutes
-- Brutes move 2 steps in a cross and kill everything in their path including thier own team
+- Brutes only move 2 steps in a cross and kill everything in their path including thier own team
 
 ![Brute movement](bruteMovement.png)
 
@@ -36,13 +36,13 @@ Progress so far:
 - [x] Pawns attack
 
 - Brutes
-- [ ] Brute move
-- [ ] Brute attack
-- [ ] Brute can friendly fire
+- [x] Brute move
+- [x] Brute attack
+- [x] Brute can friendly fire
 
-- Bishops
+- Clowns
 - [ ] Bishops move
-- [ ] Bishops attack
+- [ ] Bishops distract the right troops
 
 - Rooks
 - [X] Rooks move
