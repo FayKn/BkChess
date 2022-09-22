@@ -59,7 +59,7 @@
             <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" src="pieces/clown.png"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
-
+            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="c3" class="boardItemSize bg-blue-400">
           </div>
@@ -71,7 +71,7 @@
           <div id="c6" class="boardItemSize bg-blue-800">
           </div>
           <div id="c7" class="boardItemSize bg-blue-400">
-
+            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="c8" class="boardItemSize bg-blue-800">
             <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" src="pieces/clown.png"/>
@@ -145,7 +145,7 @@
 
           </div>
           <div id="f5" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" src="pieces/clown.png"/>
+
           </div>
           <div id="f6" class="boardItemSize bg-blue-400">
 
@@ -233,9 +233,9 @@ export default {
     switchTurn(switchColor = true) {
       if (switchColor) {
         if (this.turn === "white") {
-          // TODO: change back to black
           this.turn = "black"
         } else {
+          // TODO: change back to white
           this.turn = "black"
         }
       } else {
@@ -1106,36 +1106,29 @@ export default {
         }
       }
 
+      function addWalks(self,item){
+        item.classList.add("walkColor")
+        item.addEventListener("click", () => {
+          self.clownMovement(targeted.target, item, currentClownColor)
+        })
+      }
 
       // Add walkable squares
-      // TODO: make it 1 nice function to be called like the Brute
       if (!stuckUp) {
         const itemUp = document.getElementById(standingOnLett + (standingOnNum - 1))
-        itemUp.classList.add("walkColor")
-        itemUp.addEventListener("click", () => {
-          this.clownMovement(targeted.target, itemUp, currentClownColor)
-        })
+        addWalks(this,itemUp)
       }
       if (!stuckDown) {
         const itemDown = document.getElementById(standingOnLett + (standingOnNum + 1))
-        itemDown.classList.add("walkColor")
-        itemDown.addEventListener("click", () => {
-          this.clownMovement(targeted.target, itemDown, currentClownColor)
-        })
+        addWalks(this,itemDown)
       }
       if (!stuckLeft) {
         const itemLeft = document.getElementById(this.alphabet[standingOnLettIndex - 1] + standingOnNum)
-        itemLeft.classList.add("walkColor")
-        itemLeft.addEventListener("click", () => {
-          this.clownMovement(targeted.target, itemLeft, currentClownColor)
-        })
+        addWalks(this,itemLeft)
       }
       if (!stuckRight) {
         const itemRight = document.getElementById(this.alphabet[standingOnLettIndex + 1] + standingOnNum)
-        itemRight.classList.add("walkColor")
-        itemRight.addEventListener("click", () => {
-          this.clownMovement(targeted.target, itemRight, currentClownColor)
-        })
+        addWalks(this,itemRight)
       }
     },
     clownMovement(currentClown, target, color) {
