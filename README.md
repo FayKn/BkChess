@@ -28,7 +28,7 @@ The code is a mess right now and I should maybe fix it sometime...
 Progress so far:
 - [x] Turns
 - [x] Board made
-- [ ] Checkmate https://www.chess.com/terms/checkmate-chess
+- [ ] Victory condition
 
 - Pawns
 - [x] Pawns move
@@ -41,8 +41,9 @@ Progress so far:
 - [x] Brute can friendly fire
 
 - Clowns
-- [ ] Bishops move
-- [ ] Bishops distract the right troops
+- [ ] Clowns move
+- [ ] Clowns stop moving when they should
+- [ ] Clowns distract the right troops
 
 - Rooks
 - [X] Rooks move
