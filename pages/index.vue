@@ -6,10 +6,10 @@
         <!--row 1 -->
         <div id="a">
           <div id="a1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveRook($event)" id="blackRookL" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="blackRookL" alt="Rook" src="pieces/rook.svg"/>
           </div>
           <div id="a2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" alt="Pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="a3" class="boardItemSize bg-blue-400">
           </div>
@@ -21,19 +21,19 @@
 
           </div>
           <div id="a7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" alt="Pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="a8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" alt="Rook" src="pieces/rook.svg"/>
           </div>
         </div>
         <!--row 2 -->
         <div id="b">
           <div id="b1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" alt="brute" src="pieces/brute.png"/>
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="b3" class="boardItemSize bg-blue-800">
 
@@ -47,19 +47,19 @@
 
           </div>
           <div id="b7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn2" class="invert w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn2" class="invert w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="b8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" alt="brute" src="pieces/brute.png"/>
           </div>
         </div>
         <!--row 3 -->
         <div id="c">
           <div id="c1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" alt="clown" src="pieces/clown.png"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="c3" class="boardItemSize bg-blue-400">
           </div>
@@ -71,19 +71,19 @@
           <div id="c6" class="boardItemSize bg-blue-800">
           </div>
           <div id="c7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="c8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" alt="blown" src="pieces/clown.png"/>
           </div>
         </div>
         <!--row 4 -->
         <div id="d">
           <div id="d1" class="boardItemSize bg-blue-800">
-            <img id="blackKing" class="invert" src="pieces/king.png"/>
+            <img id="blackKing" class="invert" alt="king" src="pieces/king.png"/>
           </div>
           <div id="d2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="d3" class="boardItemSize bg-blue-800">
           </div>
@@ -97,19 +97,19 @@
 
           </div>
           <div id="d7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="d8" class="boardItemSize bg-blue-400">
-            <img id="whiteKing" class="" src="pieces/king.png"/>
+            <img id="whiteKing" alt="king" src="pieces/king.png"/>
           </div>
         </div>
         <!--row 5 -->
         <div id="e">
           <div id="e1" class="boardItemSize bg-blue-400">
-            <img id="blackQueen" class="invert" src="pieces/queen.png"/>
+            <img id="blackQueen" class="invert" alt="queen" src="pieces/queen.png"/>
           </div>
           <div id="e2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="e3" class="boardItemSize bg-blue-400">
 
@@ -124,19 +124,19 @@
 
           </div>
           <div id="e7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="e8" class="boardItemSize bg-blue-800">
-            <img id="whiteQueen" class="" src="pieces/queen.png"/>
+            <img id="whiteQueen" class="" alt="Queen" src="pieces/queen.png"/>
           </div>
         </div>
         <!--row 6 -->
         <div id="f">
           <div id="f1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" alt="clown" src="pieces/clown.png"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="f3" class="boardItemSize bg-blue-800">
 
@@ -151,19 +151,19 @@
 
           </div>
           <div id="f7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="f8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveClown" id="whiteClownR" class="w-[50%]" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="whiteClownR" class="w-[50%]" alt="clown" src="pieces/clown.png"/>
           </div>
         </div>
         <!--row 7 -->
         <div id="g">
           <div id="g1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" alt="brute" src="pieces/brute.png"/>
           </div>
           <div id="g2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="g3" class="boardItemSize bg-blue-400">
 
@@ -177,19 +177,19 @@
 
           </div>
           <div id="g7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="g8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" alt="brute" src="pieces/brute.png"/>
           </div>
         </div>
         <!--row 8 -->
         <div id="h">
           <div id="h1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveRook($event)" id="blackRookR" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="blackRookR" alt="rook" src="pieces/rook.svg"/>
           </div>
           <div id="h2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="h3" class="boardItemSize bg-blue-800">
 
@@ -203,10 +203,10 @@
 
           </div>
           <div id="h7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
           </div>
           <div id="h8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveRook($event)" id="whiteRookR" class="invert" src="pieces/rook.svg"/>
+            <img @click="decideMoveRook($event)" id="whiteRookR" class="invert" alt="rook" src="pieces/rook.svg"/>
           </div>
         </div>
       </div>
@@ -421,8 +421,6 @@ export default {
 
       const currentPawnType = currentPawn.match(/[a-zA-Z]+/g);
 
-      // Get current pawn's number
-      const currentPawnNumber = parseInt(currentPawn.match(/\d/g));
 
       // Check if pawn has been moved so it can only take 2 steps once
       let pawnMoved = true
@@ -487,14 +485,14 @@ export default {
             rightPos = rightLetter + (standingOnNum - 1)
           }
         }
-        const currentPawnColor = currentPawn.match(/[black||white]+/g)[0];
+        const currentPawnColor = currentPawn.match(/[black|white]+/g)[0];
 
         let attackRightId
         let rightAttackable = false
         if (rightPos !== undefined) {
           attackRightId = document.getElementById(rightPos);
           if (attackRightId.childNodes.length > 0) {
-            rightAttackable = attackRightId.childNodes[0].id.match(/[black||white]+/g)[0] !== currentPawnColor;
+            rightAttackable = attackRightId.childNodes[0].id.match(/[black|white]+/g)[0] !== currentPawnColor;
           }
         }
         let attackLeftId
@@ -502,7 +500,7 @@ export default {
         if (leftPos !== undefined) {
           attackLeftId = document.getElementById(leftPos);
           if (attackLeftId.childNodes.length > 0) {
-            leftAttackable = attackLeftId.childNodes[0].id.match(/[black||white]+/g)[0] !== currentPawnColor;
+            leftAttackable = attackLeftId.childNodes[0].id.match(/[black|white]+/g)[0] !== currentPawnColor;
           }
         }
 
@@ -972,8 +970,6 @@ export default {
     decideMoveBrute(targeted) {
       // Get block pawn is standing on
       const standingOn = targeted.target.parentElement.id;
-      // Get current pawn in (white/black)Brute(R/L) format
-      const currentBrute = targeted.target.id;
 
       // get only number of the square the pawn is standing on
       const standingOnNum = parseInt(standingOn.slice(1))
@@ -981,8 +977,6 @@ export default {
       // get the letter of the square the pawn is standing on
       const standingOnLett = standingOn.slice(0, 1);
       const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
-
-      const currentBruteColor = currentBrute.match(/[black|white]+/)[0];
 
       const stuckUp = (standingOnNum - 2) <= 0
       const stuckDown = (standingOnNum + 2) >= 8
