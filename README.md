@@ -21,7 +21,10 @@ The differences between this and normal chess are:
 - The bichop aka clown has an AOE distraction effect, the blocks in front of it is are confused and won't be able to move except for the king because he's based. 
 Can walk 1 step each direction
   ![clown movement](clownMovement.png)
-- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepid, when she dies skip 2 turns
+- If movement fields of clowns overlaps and the other clown moves the clown will need to move to reset it because attention has been stolen
+- Clowns can't distract other clowns
+
+- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepit, when she dies skip 2 turns
 
 The code is a mess right now and I should maybe fix it sometime...
 
@@ -41,9 +44,11 @@ Progress so far:
 - [x] Brute can friendly fire
 
 - Clowns
-- [ ] Clowns move
-- [ ] Clowns stop moving when they should
-- [ ] Clowns distract the right troops
+- [X] Clowns move
+- [X] Clowns stop moving when they should
+- [X] Clowns distract the right troops
+- [X] Clowns can't distract themselves
+- [X] Can remove each other's distraction
 
 - Rooks
 - [X] Rooks move

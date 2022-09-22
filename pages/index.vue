@@ -30,7 +30,7 @@
         <!--row 2 -->
         <div id="b">
           <div id="b1" class="boardItemSize bg-blue-800">
-
+            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" src="pieces/brute.png"/>
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -56,10 +56,10 @@
         <!--row 3 -->
         <div id="c">
           <div id="c1" class="boardItemSize bg-blue-400">
-            <img id="blackClownL" class="w-[50%] invert" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" src="pieces/clown.png"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" src="pieces/pawn.svg"/>
+
           </div>
           <div id="c3" class="boardItemSize bg-blue-400">
           </div>
@@ -71,10 +71,10 @@
           <div id="c6" class="boardItemSize bg-blue-800">
           </div>
           <div id="c7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" src="pieces/pawn.svg"/>
+
           </div>
           <div id="c8" class="boardItemSize bg-blue-800">
-            <img id="whiteClownL" class="w-[50%]" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" src="pieces/clown.png"/>
           </div>
         </div>
         <!--row 4 -->
@@ -86,7 +86,6 @@
             <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" src="pieces/pawn.svg"/>
           </div>
           <div id="d3" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" src="pieces/brute.png"/>
           </div>
           <div id="d4" class="boardItemSize bg-blue-400">
 
@@ -134,7 +133,7 @@
         <!--row 6 -->
         <div id="f">
           <div id="f1" class="boardItemSize bg-blue-800">
-            <img id="blackPawnR" class="w-[50%] invert" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" src="pieces/clown.png"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" src="pieces/pawn.svg"/>
@@ -146,7 +145,7 @@
 
           </div>
           <div id="f5" class="boardItemSize bg-blue-800">
-
+            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" src="pieces/clown.png"/>
           </div>
           <div id="f6" class="boardItemSize bg-blue-400">
 
@@ -155,7 +154,7 @@
             <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" src="pieces/pawn.svg"/>
           </div>
           <div id="f8" class="boardItemSize bg-blue-400">
-            <img id="whiteKnightR" class="w-[50%]" src="pieces/clown.png"/>
+            <img @click="decideMoveClown" id="whiteClownR" class="w-[50%]" src="pieces/clown.png"/>
           </div>
         </div>
         <!--row 7 -->
@@ -257,15 +256,30 @@ export default {
       board.remove()
       wrapper.appendChild(boardClone)
 
+      function distracted(self ,pawnSelected) {
+        // Check who'se turn it not is
+        const notTurn = self.turn === "white" ? "black" : "white"
+        // Check if the pawn is currently distracted
+        if (!pawnSelected.parentNode.classList.contains(notTurn + "DistractionField")) {
+          return true
+        } else {
+          return false
+        }
+      }
+
 
       // Put event listeners back on pawn
       for (let i = 1; i < 9; i++) {
         const pawnToSelect = this.turn + "Pawn" + i
         const pawnSelected = document.getElementById(pawnToSelect)
+
+
         if (pawnSelected) {
-          pawnSelected.addEventListener("click", (e) => {
-            this.decideMovePawn(e)
-          })
+          if (distracted(this,pawnSelected)) {
+            pawnSelected.addEventListener("click", (e) => {
+              this.decideMovePawn(e)
+            })
+          }
         }
       }
 
@@ -276,9 +290,11 @@ export default {
       const rookSelectedR = document.getElementById(rookToSelectR)
 
       if (rookSelectedL) {
-        rookSelectedL.addEventListener("click", (e) => {
-          this.decideMoveRook(e)
-        })
+        if(distracted(this,rookSelectedL)) {
+          rookSelectedL.addEventListener("click", (e) => {
+            this.decideMoveRook(e)
+          })
+        }
       }
       if (rookSelectedR) {
         rookSelectedR.addEventListener("click", (e) => {
@@ -286,6 +302,8 @@ export default {
         })
       }
 
+
+      // Brutes event listeners
       const bruteToSelectL = this.turn + "BruteL"
       const bruteToSelectR = this.turn + "BruteR"
 
@@ -293,13 +311,34 @@ export default {
       const bruteSelectedR = document.getElementById(bruteToSelectR)
 
       if (bruteSelectedL) {
-        bruteSelectedL.addEventListener("click", (e) => {
-          this.decideMoveBrute(e)
-        })
+        if(distracted(this,bruteSelectedL)) {
+          bruteSelectedL.addEventListener("click", (e) => {
+            this.decideMoveBrute(e)
+          })
+        }
       }
       if (bruteSelectedR) {
         bruteSelectedR.addEventListener("click", (e) => {
           this.decideMoveBrute(e)
+        })
+      }
+
+
+      // Clown event listeners
+      const clownToSelectL = this.turn + "ClownL"
+      const clownToSelectR = this.turn + "ClownR"
+
+      const clownSelectedL = document.getElementById(clownToSelectL)
+      const clownSelectedR = document.getElementById(clownToSelectR)
+
+      if (clownSelectedL) {
+        clownSelectedL.addEventListener("click", (e) => {
+          this.decideMoveClown(e)
+        })
+      }
+      if (clownSelectedR) {
+        clownSelectedR.addEventListener("click", (e) => {
+          this.decideMoveClown(e)
         })
       }
 
@@ -930,9 +969,9 @@ export default {
 
 
     // Brute move set
-    decideMoveBrute(targeted){
+    decideMoveBrute(targeted) {
       // Get block pawn is standing on
-      const standingOn =targeted.target.parentElement.id;
+      const standingOn = targeted.target.parentElement.id;
       // Get current pawn in (white/black)Brute(R/L) format
       const currentBrute = targeted.target.id;
 
@@ -945,60 +984,58 @@ export default {
 
       const currentBruteColor = currentBrute.match(/[black|white]+/)[0];
 
-      const stuckUp = (standingOnNum-2) <= 0
-      const stuckDown = (standingOnNum+2) >= 8
-      const stuckLeft = (standingOnLettIndex-2) < 0
-      const stuckRight = (standingOnLettIndex+2) > 7
+      const stuckUp = (standingOnNum - 2) <= 0
+      const stuckDown = (standingOnNum + 2) >= 8
+      const stuckLeft = (standingOnLettIndex - 2) < 0
+      const stuckRight = (standingOnLettIndex + 2) > 7
 
 
-
-      function addAttackables(self,firstAttack, secondAttack){
+      function addAttackables(self, firstAttack, secondAttack) {
         const firstAttackSelected = document.getElementById(firstAttack)
         const secondAttackSelected = document.getElementById(secondAttack)
 
-        console.log(firstAttack, secondAttack)
 
         firstAttackSelected.classList.add("attackColor")
         secondAttackSelected.classList.add("attackColor")
 
-        const _function = function(){
-          self.bruteMovement(targeted.target ,firstAttackSelected, secondAttackSelected)
+        const _function = function () {
+          self.bruteMovement(targeted.target, firstAttackSelected, secondAttackSelected)
         }
 
         firstAttackSelected.addEventListener("click", _function)
         secondAttackSelected.addEventListener("click", _function)
       }
 
-      if(!stuckUp){
-        const firstAttack =  standingOnLett+(standingOnNum-1)
-        const secondAttack = standingOnLett+(standingOnNum-2)
-
-        addAttackables(this ,firstAttack, secondAttack)
-      }
-
-      if(!stuckDown){
-        const firstAttack =  standingOnLett+(standingOnNum+1)
-        const secondAttack = standingOnLett+(standingOnNum+2)
+      if (!stuckUp) {
+        const firstAttack = standingOnLett + (standingOnNum - 1)
+        const secondAttack = standingOnLett + (standingOnNum - 2)
 
         addAttackables(this, firstAttack, secondAttack)
       }
 
-      if(!stuckLeft){
-        const firstAttack = this.alphabet[standingOnLettIndex-1] + standingOnNum
-        const secondAttack = this.alphabet[standingOnLettIndex-2] + standingOnNum
+      if (!stuckDown) {
+        const firstAttack = standingOnLett + (standingOnNum + 1)
+        const secondAttack = standingOnLett + (standingOnNum + 2)
 
         addAttackables(this, firstAttack, secondAttack)
       }
 
-      if(!stuckRight){
-        const firstAttack = this.alphabet[standingOnLettIndex+1] + standingOnNum
-        const secondAttack = this.alphabet[standingOnLettIndex+2] + standingOnNum
+      if (!stuckLeft) {
+        const firstAttack = this.alphabet[standingOnLettIndex - 1] + standingOnNum
+        const secondAttack = this.alphabet[standingOnLettIndex - 2] + standingOnNum
+
+        addAttackables(this, firstAttack, secondAttack)
+      }
+
+      if (!stuckRight) {
+        const firstAttack = this.alphabet[standingOnLettIndex + 1] + standingOnNum
+        const secondAttack = this.alphabet[standingOnLettIndex + 2] + standingOnNum
 
         addAttackables(this, firstAttack, secondAttack)
       }
     },
 
-    bruteMovement(currentBrute ,firstVictim, secondVictim){
+    bruteMovement(currentBrute, firstVictim, secondVictim) {
 
       // Haal alle kiddo's weg
       while (firstVictim.firstChild) {
@@ -1020,6 +1057,158 @@ export default {
       // Haal de classes weg en wissel de beurt
       this.switchTurn()
     },
+
+    // Clown move set
+    decideMoveClown(targeted) {
+      // Get block pawn is standing on
+      const standingOn = targeted.target.parentElement.id;
+      // Get current pawn in (white/black)Brute(R/L) format
+      const currentClown = targeted.target.id;
+
+      // get only number of the square the pawn is standing on
+      const standingOnNum = parseInt(standingOn.slice(1))
+
+      // get the letter of the square the pawn is standing on
+      const standingOnLett = standingOn.slice(0, 1);
+      const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
+
+      const currentClownColor = currentClown.match(/[black|white]+/)[0];
+
+
+      // Decide how stuck an element is on the board
+      let stuckUp = (standingOnNum - 1) <= 0
+      let stuckDown = (standingOnNum + 1) >= 8
+      let stuckLeft = (standingOnLettIndex - 1) < 0
+      let stuckRight = (standingOnLettIndex + 1) > 7
+
+      if (!stuckUp) {
+        const itemUp = document.getElementById(standingOnLett + (standingOnNum - 1))
+        if (itemUp.childNodes.length > 0) {
+          stuckUp = true
+        }
+      }
+      if (!stuckDown) {
+        const itemDown = document.getElementById(standingOnLett + (standingOnNum + 1))
+        if (itemDown.childNodes.length > 0) {
+          stuckDown = true
+        }
+      }
+      if (!stuckLeft) {
+        const itemLeft = document.getElementById(this.alphabet[standingOnLettIndex - 1] + standingOnNum)
+        if (itemLeft.childNodes.length > 0) {
+          stuckLeft = true
+        }
+      }
+      if (!stuckRight) {
+        const itemRight = document.getElementById(this.alphabet[standingOnLettIndex + 1] + standingOnNum)
+        if (itemRight.childNodes.length > 0) {
+          stuckRight = true
+        }
+      }
+
+
+      // Add walkable squares
+      // TODO: make it 1 nice function to be called like the Brute
+      if (!stuckUp) {
+        const itemUp = document.getElementById(standingOnLett + (standingOnNum - 1))
+        itemUp.classList.add("walkColor")
+        itemUp.addEventListener("click", () => {
+          this.clownMovement(targeted.target, itemUp, currentClownColor)
+        })
+      }
+      if (!stuckDown) {
+        const itemDown = document.getElementById(standingOnLett + (standingOnNum + 1))
+        itemDown.classList.add("walkColor")
+        itemDown.addEventListener("click", () => {
+          this.clownMovement(targeted.target, itemDown, currentClownColor)
+        })
+      }
+      if (!stuckLeft) {
+        const itemLeft = document.getElementById(this.alphabet[standingOnLettIndex - 1] + standingOnNum)
+        itemLeft.classList.add("walkColor")
+        itemLeft.addEventListener("click", () => {
+          this.clownMovement(targeted.target, itemLeft, currentClownColor)
+        })
+      }
+      if (!stuckRight) {
+        const itemRight = document.getElementById(this.alphabet[standingOnLettIndex + 1] + standingOnNum)
+        itemRight.classList.add("walkColor")
+        itemRight.addEventListener("click", () => {
+          this.clownMovement(targeted.target, itemRight, currentClownColor)
+        })
+      }
+    },
+    clownMovement(currentClown, target, color) {
+      // Haal alle kiddo's weg
+      while (target.firstChild) {
+        target.removeChild(target.lastChild);
+      }
+
+      const clownClone = currentClown.cloneNode()
+
+      // haal de clown weg
+      currentClown.remove()
+
+      // plak hem weer terug op z'n nieuwe plek
+      target.appendChild(clownClone)
+
+      const newClown = target.childNodes[0]
+
+      const newClownSide = newClown.id.match(/[R|L]/)[0]
+
+      let notClownSide
+      if (newClownSide === "R") {
+        notClownSide = "L"
+      } else {
+        notClownSide = "R"
+      }
+
+      const newClownParent = target.id
+      const newClownParentLett = newClownParent.slice(0, 1)
+      const newClownParentNum = parseInt(newClownParent.slice(1))
+
+      document.querySelectorAll("." + CSS.escape(this.turn) + "DistractionField" + CSS.escape(newClownSide)).forEach((el) => {
+        el.classList.remove(CSS.escape(this.turn) + "DistractionField")
+        el.classList.remove(CSS.escape(this.turn) + "DistractionField" + CSS.escape(newClownSide))
+      });
+
+
+      const newClownLeft = document.getElementById(this.alphabet[this.alphabet.indexOf(newClownParentLett) - 1] + newClownParentNum)
+      const newClownRight = document.getElementById(this.alphabet[this.alphabet.indexOf(newClownParentLett) + 1] + newClownParentNum)
+
+      let newClownDown
+      let newClownLeftDiag
+      let newClownRightDiag
+      // Make sure the field is infront of the clown
+      if (color === "black") {
+        newClownDown = document.getElementById(newClownParentLett + (newClownParentNum + 1))
+        newClownLeftDiag = document.getElementById(this.alphabet[this.alphabet.indexOf(newClownParentLett) - 1] + (newClownParentNum + 1))
+        newClownRightDiag = document.getElementById(this.alphabet[this.alphabet.indexOf(newClownParentLett) + 1] + (newClownParentNum + 1))
+      } else {
+        newClownDown = document.getElementById(newClownParentLett + (newClownParentNum - 1))
+        newClownLeftDiag = document.getElementById(this.alphabet[this.alphabet.indexOf(newClownParentLett) - 1] + (newClownParentNum - 1))
+        newClownRightDiag = document.getElementById(this.alphabet[this.alphabet.indexOf(newClownParentLett) + 1] + (newClownParentNum - 1))
+      }
+
+
+      // Add distraction fields
+      newClownLeft.classList.add(this.turn + "DistractionField")
+      newClownRight.classList.add(this.turn + "DistractionField")
+      newClownDown.classList.add(this.turn + "DistractionField")
+      newClownLeftDiag.classList.add(this.turn + "DistractionField")
+      newClownRightDiag.classList.add(this.turn + "DistractionField")
+
+      // Add side specific fields
+      newClownLeft.classList.add(this.turn + "DistractionField" + newClownSide)
+      newClownRight.classList.add(this.turn + "DistractionField" + newClownSide)
+      newClownDown.classList.add(this.turn + "DistractionField" + newClownSide)
+      newClownLeftDiag.classList.add(this.turn + "DistractionField" + newClownSide)
+      newClownRightDiag.classList.add(this.turn + "DistractionField" + newClownSide)
+
+
+      // Haal de classes (behalve de fields) weg en wissel de beurt
+      this.switchTurn()
+    }
   }
 }
 </script>
@@ -1027,6 +1216,14 @@ export default {
 <style>
 .boardItemSize {
   @apply w-[100px] h-[100px] flex justify-center content-center
+}
+
+.blackDistractionField {
+  @apply bg-violet-800
+}
+
+.whiteDistractionField {
+  @apply bg-violet-400
 }
 
 .walkColor {
