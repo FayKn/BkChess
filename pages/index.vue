@@ -110,6 +110,7 @@
         <!--row 5 -->
         <div id="e">
           <div id="e1" class="boardItemSize bg-blue-400">
+            <img @click="decideMoveQueen($event)" id="blackQueen" class="invert" alt="queen" src="/pieces/queen.png"/>
           </div>
           <div id="e2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -125,7 +126,6 @@
           </div>
           <div id="e6" class="boardItemSize bg-blue-800">
 
-            <img @click="decideMoveQueen($event)" id="blackQueen" class="invert" alt="queen" src="/pieces/queen.png"/>
           </div>
           <div id="e7" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" alt="pawn"
@@ -241,7 +241,7 @@ export default {
   },
   methods: {
     // Universal functions
-    switchTurn() {
+    switchTurn()  {
       let notTurn
       if (this.turn === "white") {
         if(this.blackSkipTurns === 0) {
@@ -384,6 +384,16 @@ export default {
         queenSelected.addEventListener("click", (e) => {
           this.decideMoveQueen(e)
         })
+      }
+
+
+
+      if(!queenSelected && !kingSelected){
+        alert(notTurn + " won")
+        alert(notTurn + " won")
+        alert(notTurn + " won")
+        alert(notTurn + " won")
+        window.location.reload()
       }
     },
 

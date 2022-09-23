@@ -31,7 +31,7 @@ The code is a mess right now and I should maybe fix it sometime...
 Progress so far:
 - [x] Turns
 - [x] Board made
-- [ ] Victory condition
+- [x] Victory condition (if queen is killed last player can still walk because funni)
 
 - Pawns
 - [x] Pawns move
