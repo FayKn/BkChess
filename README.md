@@ -60,8 +60,8 @@ Progress so far:
 - [ ] Turns skip at death
 
 - Kings
-- [ ] Kings move
-- [ ] Kings attack
+- [X] Kings move
+- [X] Kings attack
 
 - Advanced stuff/rules (might make, might not):
 - [ ] Check prevent walking into check https://www.chess.com/terms/check-chess  

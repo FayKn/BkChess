@@ -21,7 +21,8 @@
 
           </div>
           <div id="a7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" alt="Pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn1" class="invert w-[70%]" alt="Pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="a8" class="boardItemSize bg-blue-800">
             <img @click="decideMoveRook($event)" id="whiteRookL" class="invert" alt="Rook" src="pieces/rook.svg"/>
@@ -30,7 +31,8 @@
         <!--row 2 -->
         <div id="b">
           <div id="b1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" alt="brute" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" alt="brute"
+                 src="pieces/brute.png"/>
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
@@ -47,7 +49,8 @@
 
           </div>
           <div id="b7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn2" class="invert w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn2" class="invert w-[70%]" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="b8" class="boardItemSize bg-blue-400">
             <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" alt="brute" src="pieces/brute.png"/>
@@ -71,7 +74,8 @@
           <div id="c6" class="boardItemSize bg-blue-800">
           </div>
           <div id="c7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn3" class="w-[70%] invert" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="c8" class="boardItemSize bg-blue-800">
             <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" alt="blown" src="pieces/clown.png"/>
@@ -80,7 +84,7 @@
         <!--row 4 -->
         <div id="d">
           <div id="d1" class="boardItemSize bg-blue-800">
-            <img id="blackKing" class="invert" alt="king" src="pieces/king.png"/>
+            <img @click="decideMoveKing($event)" id="blackKing" class="invert" alt="king" src="pieces/king.png"/>
           </div>
           <div id="d2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
@@ -88,7 +92,6 @@
           <div id="d3" class="boardItemSize bg-blue-800">
           </div>
           <div id="d4" class="boardItemSize bg-blue-400">
-
           </div>
           <div id="d5" class="boardItemSize bg-blue-800">
 
@@ -97,7 +100,8 @@
 
           </div>
           <div id="d7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn4" class="w-[70%] invert" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="d8" class="boardItemSize bg-blue-400">
             <img id="whiteKing" alt="king" src="pieces/king.png"/>
@@ -124,7 +128,8 @@
 
           </div>
           <div id="e7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn5" class="w-[70%] invert" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="e8" class="boardItemSize bg-blue-800">
             <img id="whiteQueen" class="" alt="Queen" src="pieces/queen.png"/>
@@ -151,7 +156,8 @@
 
           </div>
           <div id="f7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn6" class="w-[70%] invert" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="f8" class="boardItemSize bg-blue-400">
             <img @click="decideMoveClown" id="whiteClownR" class="w-[50%]" alt="clown" src="pieces/clown.png"/>
@@ -160,7 +166,8 @@
         <!--row 7 -->
         <div id="g">
           <div id="g1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" alt="brute" src="pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" alt="brute"
+                 src="pieces/brute.png"/>
           </div>
           <div id="g2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" alt="pawn" src="pieces/pawn.svg"/>
@@ -177,7 +184,8 @@
 
           </div>
           <div id="g7" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn7" class="w-[70%] invert" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="g8" class="boardItemSize bg-blue-800">
             <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" alt="brute" src="pieces/brute.png"/>
@@ -203,7 +211,8 @@
 
           </div>
           <div id="h7" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" alt="pawn" src="pieces/pawn.svg"/>
+            <img @click="decideMovePawn($event)" id="whitePawn8" class="w-[70%] invert" alt="pawn"
+                 src="pieces/pawn.svg"/>
           </div>
           <div id="h8" class="boardItemSize bg-blue-400">
             <img @click="decideMoveRook($event)" id="whiteRookR" class="invert" alt="rook" src="pieces/rook.svg"/>
@@ -256,7 +265,7 @@ export default {
       board.remove()
       wrapper.appendChild(boardClone)
 
-      function distracted(self ,pawnSelected) {
+      function distracted(self, pawnSelected) {
         // Check who'se turn it not is
         const notTurn = self.turn === "white" ? "black" : "white"
         // Check if the pawn is currently distracted
@@ -275,7 +284,7 @@ export default {
 
 
         if (pawnSelected) {
-          if (distracted(this,pawnSelected)) {
+          if (distracted(this, pawnSelected)) {
             pawnSelected.addEventListener("click", (e) => {
               this.decideMovePawn(e)
             })
@@ -290,7 +299,7 @@ export default {
       const rookSelectedR = document.getElementById(rookToSelectR)
 
       if (rookSelectedL) {
-        if(distracted(this,rookSelectedL)) {
+        if (distracted(this, rookSelectedL)) {
           rookSelectedL.addEventListener("click", (e) => {
             this.decideMoveRook(e)
           })
@@ -311,7 +320,7 @@ export default {
       const bruteSelectedR = document.getElementById(bruteToSelectR)
 
       if (bruteSelectedL) {
-        if(distracted(this,bruteSelectedL)) {
+        if (distracted(this, bruteSelectedL)) {
           bruteSelectedL.addEventListener("click", (e) => {
             this.decideMoveBrute(e)
           })
@@ -342,6 +351,16 @@ export default {
         })
       }
 
+
+      // King event listeners
+      const kingToSelect = this.turn + "King"
+      const kingSelected = document.getElementById(kingToSelect)
+
+      if (kingSelected) {
+        kingSelected.addEventListener("click", (e) => {
+          this.decideMoveKing(e)
+        })
+      }
     },
 
 
@@ -370,7 +389,6 @@ export default {
 
       this.switchTurn()
     },
-
     attackPawn(targeted, moveTo) {
       let currentPawn
 
@@ -397,7 +415,6 @@ export default {
 
       this.switchTurn()
     },
-
     decideMovePawn(targeted) {
       // Get block pawn is standing on
       let standingOn
@@ -666,7 +683,6 @@ export default {
       moveToId.addEventListener("click", _listener);
       this.switchTurn()
     },
-
     attackRook(targeted, moveTo) {
       let currentRook
 
@@ -691,7 +707,6 @@ export default {
 
       this.switchTurn()
     },
-
     decideMoveRook(targeted) {
       // Get block pawn is standing on
       let standingOn
@@ -1028,7 +1043,6 @@ export default {
         addAttackables(this, firstAttack, secondAttack)
       }
     },
-
     bruteMovement(currentBrute, firstVictim, secondVictim) {
 
       // Haal alle kiddo's weg
@@ -1054,15 +1068,15 @@ export default {
 
     // Clown move set
     decideMoveClown(targeted) {
-      // Get block pawn is standing on
+      // Get block clown is standing on
       const standingOn = targeted.target.parentElement.id;
-      // Get current pawn in (white/black)Brute(R/L) format
+      // Get current pawn in (white/black)Clown(R/L) format
       const currentClown = targeted.target.id;
 
       // get only number of the square the pawn is standing on
       const standingOnNum = parseInt(standingOn.slice(1))
 
-      // get the letter of the square the pawn is standing on
+      // get the letter of the square the clown is standing on
       const standingOnLett = standingOn.slice(0, 1);
       const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
 
@@ -1100,7 +1114,7 @@ export default {
         }
       }
 
-      function addWalks(self,item){
+      function addWalks(self, item) {
         item.classList.add("walkColor")
         item.addEventListener("click", () => {
           self.clownMovement(targeted.target, item, currentClownColor)
@@ -1110,19 +1124,19 @@ export default {
       // Add walkable squares
       if (!stuckUp) {
         const itemUp = document.getElementById(standingOnLett + (standingOnNum - 1))
-        addWalks(this,itemUp)
+        addWalks(this, itemUp)
       }
       if (!stuckDown) {
         const itemDown = document.getElementById(standingOnLett + (standingOnNum + 1))
-        addWalks(this,itemDown)
+        addWalks(this, itemDown)
       }
       if (!stuckLeft) {
         const itemLeft = document.getElementById(this.alphabet[standingOnLettIndex - 1] + standingOnNum)
-        addWalks(this,itemLeft)
+        addWalks(this, itemLeft)
       }
       if (!stuckRight) {
         const itemRight = document.getElementById(this.alphabet[standingOnLettIndex + 1] + standingOnNum)
-        addWalks(this,itemRight)
+        addWalks(this, itemRight)
       }
     },
     clownMovement(currentClown, target, color) {
@@ -1195,7 +1209,246 @@ export default {
 
       // Haal de classes (behalve de fields) weg en wissel de beurt
       this.switchTurn()
-    }
+    },
+
+    // King moveset
+    decideMoveKing(targeted) {
+      // Get block the King is standing on
+      const standingOn = targeted.target.parentElement.id;
+      // Get current pawn in (white/black)King format
+      const currentKing = targeted.target.id;
+
+      // get only number of the square the king is standing on
+      const standingOnNum = parseInt(standingOn.slice(1))
+
+      // get the letter of the square the king is standing on
+      const standingOnLett = standingOn.slice(0, 1);
+      const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
+
+      const currentKingColor = currentKing.match(/[black|white]+/)[0];
+
+      // Check if the king is stuck
+      let stuckUp = false
+      let stuckDown = false
+      let stuckLeft = false
+      let stuckRight = false
+      let stuckLeftUp = false
+      let stuckRightUp = false
+      let stuckLeftDown = false
+      let stuckRightDown = false
+
+      let attackables = []
+
+      // Check if the king is stuck up
+      if (standingOnNum === 1) {
+        stuckUp = true
+      } else {
+        const itemUp = document.getElementById(standingOnLett + (standingOnNum - 1))
+        if (itemUp.firstChild) {
+          if (itemUp.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckUp = true
+          } else {
+            stuckUp = true
+            attackables.push(itemUp)
+          }
+        }
+      }
+
+      // Check if the king is stuck down
+      if (standingOnNum === 8) {
+        stuckDown = true
+      } else {
+        const itemDown = document.getElementById(standingOnLett + (standingOnNum + 1))
+        if (itemDown.firstChild) {
+          if (itemDown.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckDown = true
+          } else {
+            stuckDown = true
+            attackables.push(itemDown)
+          }
+        }
+      }
+
+      // Check if the king is stuck left
+      if (standingOnLettIndex === 0) {
+        stuckLeft = true
+      } else {
+        const itemLeft = document.getElementById(this.alphabet[standingOnLettIndex - 1] + standingOnNum)
+        if (itemLeft.firstChild) {
+          if (itemLeft.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckLeft = true
+          } else {
+            stuckLeft = true
+            attackables.push(itemLeft)
+          }
+        }
+      }
+
+      // Check if the king is stuck right
+      if (standingOnLettIndex === 7) {
+        stuckRight = true
+      } else {
+        const itemRight = document.getElementById(this.alphabet[standingOnLettIndex + 1] + standingOnNum)
+        if (itemRight.firstChild) {
+          if (itemRight.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckRight = true
+          } else {
+            stuckRight = true
+            attackables.push(itemRight)
+          }
+        }
+      }
+
+      // Check if the king is stuck left up
+      if (standingOnNum === 1 || standingOnLettIndex === 0) {
+        stuckLeftUp = true
+      } else {
+        const itemLeftUp = document.getElementById(this.alphabet[standingOnLettIndex - 1] + (standingOnNum - 1))
+        if (itemLeftUp.firstChild) {
+          if (itemLeftUp.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckLeftUp = true
+          } else {
+            stuckLeftUp = true
+            attackables.push(itemLeftUp)
+          }
+        }
+      }
+
+      // Check if the king is stuck right up
+      if (standingOnNum === 1 || standingOnLettIndex === 7) {
+        stuckRightUp = true
+      } else {
+        const itemRightUp = document.getElementById(this.alphabet[standingOnLettIndex + 1] + (standingOnNum - 1))
+        if (itemRightUp.firstChild) {
+          if (itemRightUp.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckRightUp = true
+          } else {
+            stuckRightUp = true
+            attackables.push(itemRightUp)
+          }
+        }
+      }
+
+      // Check if the king is stuck left down
+      if (standingOnNum === 8 || standingOnLettIndex === 0) {
+        stuckLeftDown = true
+      } else {
+        const itemLeftDown = document.getElementById(this.alphabet[standingOnLettIndex - 1] + (standingOnNum + 1))
+        if (itemLeftDown.firstChild) {
+          if (itemLeftDown.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckLeftDown = true
+          } else {
+            stuckLeftDown = true
+            attackables.push(itemLeftDown)
+          }
+        }
+      }
+
+      // Check if the king is stuck right down
+      if (standingOnNum === 8 || standingOnLettIndex === 7) {
+        stuckRightDown = true
+      } else {
+        const itemRightDown = document.getElementById(this.alphabet[standingOnLettIndex + 1] + (standingOnNum + 1))
+        if (itemRightDown.firstChild) {
+          if (itemRightDown.firstChild.id.match(/[black|white]+/)[0] === currentKingColor) {
+            stuckRightDown = true
+          } else {
+            stuckRightDown = true
+            attackables.push(itemRightDown)
+          }
+        }
+      }
+
+      console.log(stuckUp, stuckLeftUp, stuckRightUp)
+      console.log(stuckLeft, "KING", stuckRight)
+      console.log(stuckDown, stuckLeftDown, stuckRightDown)
+
+      console.log(attackables)
+
+      function addWalks(self, item) {
+        item.classList.add("walkColor")
+        item.addEventListener("click", () => {
+          self.kingWalk(targeted.target, item)
+        })
+      }
+
+      if (!stuckUp) {
+        const itemUp = document.getElementById(standingOnLett + (standingOnNum - 1))
+        addWalks(this, itemUp)
+      }
+      if (!stuckDown) {
+        const itemDown = document.getElementById(standingOnLett + (standingOnNum + 1))
+        addWalks(this, itemDown)
+      }
+      if (!stuckLeft) {
+        const itemLeft = document.getElementById(this.alphabet[standingOnLettIndex - 1] + standingOnNum)
+        addWalks(this, itemLeft)
+      }
+      if (!stuckRight) {
+        const itemRight = document.getElementById(this.alphabet[standingOnLettIndex + 1] + standingOnNum)
+        addWalks(this, itemRight)
+      }
+      if (!stuckLeftUp) {
+        const itemLeftUp = document.getElementById(this.alphabet[standingOnLettIndex - 1] + (standingOnNum - 1))
+        addWalks(this, itemLeftUp)
+      }
+      if (!stuckRightUp) {
+        const itemRightUp = document.getElementById(this.alphabet[standingOnLettIndex + 1] + (standingOnNum - 1))
+        addWalks(this, itemRightUp)
+      }
+      if (!stuckLeftDown) {
+        const itemLeftDown = document.getElementById(this.alphabet[standingOnLettIndex - 1] + (standingOnNum + 1))
+        addWalks(this, itemLeftDown)
+      }
+      if (!stuckRightDown) {
+        const itemRightDown = document.getElementById(this.alphabet[standingOnLettIndex + 1] + (standingOnNum + 1))
+        addWalks(this, itemRightDown)
+      }
+
+
+      if(attackables.length > 0) {
+        attackables.forEach(item => {
+          item.classList.add("attackColor")
+          item.addEventListener("click", () => {
+            this.kingAttack(targeted.target, item)
+          })
+        })
+      }
+
+    },
+    kingWalk(currentKing, target) {
+      // Haal alle kiddo's weg
+      while (target.firstChild) {
+        target.removeChild(target.lastChild);
+      }
+
+      const cloneKing = currentKing.cloneNode()
+
+      // haal de king weg
+      currentKing.remove()
+
+      // plak hem weer terug op z'n nieuwe plek
+      target.appendChild(cloneKing)
+
+      this.switchTurn()
+    },
+
+    kingAttack(currentKing, target) {
+      // Haal alle kiddo's weg
+      while (target.firstChild) {
+        target.removeChild(target.lastChild);
+      }
+
+      const cloneKing = currentKing.cloneNode()
+
+      // haal de king weg
+      currentKing.remove()
+
+      // plak hem weer terug op z'n nieuwe plek
+      target.appendChild(cloneKing)
+
+      this.switchTurn()
+    },
   }
 }
 </script>
