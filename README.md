@@ -3,6 +3,11 @@
 In this project I want to attemt to make Chess easier to learn and also less boring by upping the pace
 white making it more "realistic" by applying logic
 
+
+Known bugs
+----------
+- If clown is killed his distraction field is not removed
+
 The differences between this and normal chess are:
 - King and queen need to be captured to win (a country can still function with only one monarch and gender equality)
 - Castling is not allowed (it's dumb, I don't understand it so it's clearly not easy /s)
