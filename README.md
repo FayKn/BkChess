@@ -55,9 +55,9 @@ Progress so far:
 - [X] Rooks attack
 
 - Queens
-- [ ] Queens move
-- [ ] Queens attack
-- [ ] Turns skip at death
+- [X] Queens move
+- [X] Queens attack (who am I kidding)
+- [X] Turns skip at death
 
 - Kings
 - [X] Kings move
