@@ -6,7 +6,7 @@
     <!--Toggle dev tools -->
     <div class="m-1 flex flex-row">
       <p class="text-white mr-2">Dev tools:</p>
-      <input @click="toggleDevTools" type="checkbox">
+      <input aria-label="Dev tools toggle" @click="toggleDevTools" type="checkbox">
     </div>
     <div v-show="devToolsOn" class="flex flex-row mb-1">
       <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="switchTurn">Switch Turn</button>
@@ -44,7 +44,7 @@
         <div id="b">
           <div id="b1" class="boardItemSize bg-blue-800">
             <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" alt="brute"
-                 src="/pieces/brute.png"/>
+                 src="/pieces/brute.webp"/>
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -65,13 +65,13 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="b8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" alt="brute" src="/pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" alt="brute" src="/pieces/brute.webp"/>
           </div>
         </div>
         <!--row 3 -->
         <div id="c">
           <div id="c1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" alt="clown" src="/pieces/clown.png"/>
+            <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" alt="clown" src="/pieces/clown.webp"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -90,13 +90,13 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="c8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" alt="blown" src="/pieces/clown.png"/>
+            <img @click="decideMoveClown" id="whiteClownL" class="w-[50%]" alt="blown" src="/pieces/clown.webp"/>
           </div>
         </div>
         <!--row 4 -->
         <div id="d">
           <div id="d1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveKing($event)" id="blackKing" class="invert" alt="king" src="/pieces/king.png"/>
+            <img @click="decideMoveKing($event)" id="blackKing" class="invert" alt="king" src="/pieces/king.webp"/>
           </div>
           <div id="d2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -116,13 +116,13 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="d8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveKing" id="whiteKing" alt="king" src="/pieces/king.png"/>
+            <img @click="decideMoveKing" id="whiteKing" alt="king" src="/pieces/king.webp"/>
           </div>
         </div>
         <!--row 5 -->
         <div id="e">
           <div id="e1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveQueen($event)" id="blackQueen" class="invert" alt="queen" src="/pieces/queen.png"/>
+            <img @click="decideMoveQueen($event)" id="blackQueen" class="invert" alt="queen" src="/pieces/queen.webp"/>
           </div>
           <div id="e2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -144,13 +144,13 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="e8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveQueen($event)" id="whiteQueen" class="" alt="queen" src="/pieces/queen.png"/>
+            <img @click="decideMoveQueen($event)" id="whiteQueen" class="" alt="queen" src="/pieces/queen.webp"/>
           </div>
         </div>
         <!--row 6 -->
         <div id="f">
           <div id="f1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" alt="clown" src="/pieces/clown.png"/>
+            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" alt="clown" src="/pieces/clown.webp"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
             <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -172,14 +172,14 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="f8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveClown" id="whiteClownR" class="w-[50%]" alt="clown" src="/pieces/clown.png"/>
+            <img @click="decideMoveClown" id="whiteClownR" class="w-[50%]" alt="clown" src="/pieces/clown.webp"/>
           </div>
         </div>
         <!--row 7 -->
         <div id="g">
           <div id="g1" class="boardItemSize bg-blue-400">
             <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" alt="brute"
-                 src="/pieces/brute.png"/>
+                 src="/pieces/brute.webp"/>
           </div>
           <div id="g2" class="boardItemSize bg-blue-800">
             <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
@@ -200,7 +200,7 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="g8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" alt="brute" src="/pieces/brute.png"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" alt="brute" src="/pieces/brute.webp"/>
           </div>
         </div>
         <!--row 8 -->
