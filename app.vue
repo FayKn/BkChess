@@ -1,3 +1,3 @@
 <template>
-    <NuxtPage class="bg-black h-screen"/>
+    <NuxtPage class="bg-black min-h-screen overflow-hidden"/>
 </template>

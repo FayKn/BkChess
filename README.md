@@ -6,7 +6,7 @@ white making it more "realistic" by applying logic
 
 Known bugs
 ----------
-- If clown is killed his distraction field is not removed
+- None yet :)
 
 The differences between this and normal chess are:
 - King and queen need to be captured to win (a country can still function with only one monarch and gender equality)
@@ -22,14 +22,15 @@ The differences between this and normal chess are:
 
 - Promotion is not allowed this leaves pawn stranded and unable to move as a kind of meat shield, brutes would be best to clear the way if you want them gone
 
-
+ 
 - The bichop aka clown has an AOE distraction effect, the blocks in front of it is are confused and won't be able to move except for the king because he's based. 
 Can walk 1 step each direction
   ![clown movement](clownMovement.png)
 - If movement fields of clowns overlaps and the other clown moves the clown will need to move to reset it because attention has been stolen
 - Clowns can't distract other clowns
 
-- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepit, when she dies skip 2 turns
+- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepit, when she dies skips 2 turns for the opposing team, if a brute of the same team kills the queen 2 they get 2 free turns
+- so if a white brute kills a white team the black team has to skip 2 turns, no this isn't a bug I've covered up as a rule because I found it hilarious and writing this would probably take longer then fixing it
 
 The code is a mess right now and I should maybe fix it sometime...
 

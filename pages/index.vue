@@ -1,6 +1,18 @@
 <template>
   <div id="wrapper" class="flex justify-center content-center flex-col">
     <h1 class="text-white text-center">It's now: <span class="bold text-3xl">{{ turn }}</span> 's turn</h1>
+    <h2 class="text-white text-center">It's now: black has: {{ blackSkipTurns }} turn skips</h2>
+    <h2 class="text-white text-center">It's now: white has: {{ whiteSkipTurns }} turn skips</h2>
+    <!--Toggle dev tools -->
+    <div class="m-1 flex flex-row">
+      <p class="text-white mr-2">Dev tools:</p>
+      <input @click="toggleDevTools" type="checkbox">
+    </div>
+    <div v-show="devToolsOn" class="flex flex-row mb-1">
+      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="switchTurn">Switch Turn</button>
+      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="blackSkipTurns = 0">Reset black skip Turn</button>
+      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="whiteSkipTurns = 0">Reset white skips Turn</button>
+    </div>
     <div id="board" class="flex justify-center">
       <div class="flex flex-row select-none">
         <!--row 1 -->
@@ -200,7 +212,6 @@
             <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="h3" class="boardItemSize bg-blue-800">
-
           </div>
           <div id="h4" class="boardItemSize bg-blue-400">
           </div>
@@ -220,6 +231,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -237,29 +249,28 @@ export default {
       turn: "white",
       blackSkipTurns: 0,
       whiteSkipTurns: 0,
+      devToolsOn: false,
     }
   },
   methods: {
     // Universal functions
-    switchTurn()  {
+    switchTurn() {
       let notTurn
       if (this.turn === "white") {
-        if(this.blackSkipTurns === 0) {
+        if (this.blackSkipTurns === 0) {
           this.turn = "black"
-          notTurn="white"
+          notTurn = "white"
         } else {
           this.blackSkipTurns--
           this.turn = "white"
-          notTurn="black"
-        }
-      }
-      else {
-        // TODO: change back to white
-        if(this.whiteSkipTurns === 0) {
-          this.turn = "white"
           notTurn = "black"
         }
-        else{
+      } else {
+        // TODO: change back to white
+        if (this.whiteSkipTurns === 0) {
+          this.turn = "white"
+          notTurn = "black"
+        } else {
           this.whiteSkipTurns--
           this.turn = "black"
           notTurn = "white"
@@ -341,9 +352,11 @@ export default {
         }
       }
       if (bruteSelectedR) {
-        bruteSelectedR.addEventListener("click", (e) => {
-          this.decideMoveBrute(e)
-        })
+        if (distracted(this, bruteSelectedR)) {
+          bruteSelectedR.addEventListener("click", (e) => {
+            this.decideMoveBrute(e)
+          })
+        }
       }
 
 
@@ -381,20 +394,22 @@ export default {
       const queenSelected = document.getElementById(queenToSelect)
 
       if (queenSelected) {
-        queenSelected.addEventListener("click", (e) => {
-          this.decideMoveQueen(e)
-        })
+        if (distracted(this, queenSelected)) {
+          queenSelected.addEventListener("click", (e) => {
+            this.decideMoveQueen(e)
+          })
+        }
       }
 
 
-
-      if(!queenSelected && !kingSelected){
-        alert(notTurn + " won")
-        alert(notTurn + " won")
+      if (!queenSelected && !kingSelected) {
         alert(notTurn + " won")
         alert(notTurn + " won")
         window.location.reload()
       }
+    },
+    toggleDevTools() {
+      this.devToolsOn = !this.devToolsOn
     },
 
 
@@ -441,13 +456,15 @@ export default {
       const targetClone = currentPawnId.cloneNode(true)
 
       // Remove attackee and remove pawn from old position
-      if(moveToId.firstChild.alt === "queen"){
-        if(this.turn==="white"){
+      if (moveToId.firstChild.alt === "queen") {
+        if (this.turn === "white") {
           this.blackSkipTurns = 2
         } else {
           this.whiteSkipTurns = 2
         }
-
+      }
+      if (moveToId.firstChild.id.match(/[Clown]+/g)[1] === "Clown") {
+        this.clownDiedCleanup(moveToId.firstChild)
       }
       moveToId.childNodes[0].remove();
       currentPawnId.remove()
@@ -740,8 +757,23 @@ export default {
 
       const targetClone = currentPawnId.cloneNode()
 
+
+      if (moveToId.firstChild.alt === "queen") {
+        if (this.turn === "white") {
+          this.blackSkipTurns = 2
+        } else {
+          this.whiteSkipTurns = 2
+        }
+      }
+
+      if (moveToId.firstChild.id.match(/[Clown]+/g)[1] === "Clown") {
+        this.clownDiedCleanup(moveToId.firstChild)
+      }
+
       // Remove attackee and remove pawn from old position
       moveToId.childNodes[0].remove();
+
+
       targeted.target.remove()
 
       // Add the cloned pawn to the new position
@@ -1089,10 +1121,34 @@ export default {
 
       // Haal alle kiddo's weg
       while (firstVictim.firstChild) {
+        console.log(firstVictim.firstChild)
+        if (firstVictim.firstChild.alt === "queen") {
+          if (this.turn === "white") {
+            this.blackSkipTurns = 2
+          } else {
+            this.whiteSkipTurns = 2
+          }
+        }
+
+        if (firstVictim.firstChild.id.match(/[Clown]+/g)[1] === "Clown") {
+          this.clownDiedCleanup(firstVictim.firstChild)
+        }
+
         firstVictim.removeChild(firstVictim.lastChild);
       }
 
       while (secondVictim.firstChild) {
+        if (secondVictim.firstChild.alt === "queen") {
+          if (this.turn === "white") {
+            this.blackSkipTurns = 2
+          } else {
+            this.whiteSkipTurns = 2
+          }
+        }
+
+        if (secondVictim.firstChild.id.match(/[Clown]+/g)[1] === "Clown") {
+          this.clownDiedCleanup(secondVictim.firstChild)
+        }
         secondVictim.removeChild(secondVictim.lastChild);
       }
 
@@ -1252,6 +1308,27 @@ export default {
       // Haal de classes (behalve de fields) weg en wissel de beurt
       this.switchTurn()
     },
+    clownDiedCleanup(killedClown) {
+      console.log(killedClown.id)
+      const killedClownSide = killedClown.id.match(/[R|L]/)[0]
+      const killedClownColor = killedClown.id.match(/[black|white]+/)[0]
+
+      let notClownSide
+      if (killedClownSide === "R") {
+        notClownSide = "L"
+      } else {
+        notClownSide = "R"
+      }
+
+      const killedClownParent = killedClown.parentNode.id
+      const killedClownParentLett = killedClownParent.slice(0, 1)
+      const killedClownParentNum = parseInt(killedClownParent.slice(1))
+
+      document.querySelectorAll("." + CSS.escape(killedClownColor) + "DistractionField" + CSS.escape(killedClownSide)).forEach((el) => {
+        el.classList.remove(CSS.escape(killedClownColor) + "DistractionField")
+        el.classList.remove(CSS.escape(killedClownColor) + "DistractionField" + CSS.escape(killedClownSide))
+      });
+    },
 
     // King moveset
     decideMoveKing(targeted) {
@@ -1259,16 +1336,12 @@ export default {
       const standingOn = targeted.target.parentElement.id;
       // Get current pawn in (white/black)King format
       const currentKing = targeted.target.id;
-
       // get only number of the square the king is standing on
       const standingOnNum = parseInt(standingOn.slice(1))
-
       // get the letter of the square the king is standing on
       const standingOnLett = standingOn.slice(0, 1);
       const standingOnLettIndex = this.alphabet.indexOf(standingOnLett)
-
       const currentKingColor = currentKing.match(/[black|white]+/)[0];
-
       // Check if the king is stuck
       let stuckUp = false
       let stuckDown = false
@@ -1278,9 +1351,7 @@ export default {
       let stuckRightUp = false
       let stuckLeftDown = false
       let stuckRightDown = false
-
       let attackables = []
-
       // Check if the king is stuck up
       if (standingOnNum === 1) {
         stuckUp = true
@@ -1291,10 +1362,10 @@ export default {
             stuckUp = true
           } else {
             stuckUp = true
+            attackables.push(itemUp)
           }
         }
       }
-
       // Check if the king is stuck down
       if (standingOnNum === 8) {
         stuckDown = true
@@ -1305,10 +1376,10 @@ export default {
             stuckDown = true
           } else {
             stuckDown = true
+            attackables.push(itemDown)
           }
         }
       }
-
       // Check if the king is stuck left
       if (standingOnLettIndex === 0) {
         stuckLeft = true
@@ -1319,10 +1390,10 @@ export default {
             stuckLeft = true
           } else {
             stuckLeft = true
+            attackables.push(itemLeft)
           }
         }
       }
-
       // Check if the king is stuck right
       if (standingOnLettIndex === 7) {
         stuckRight = true
@@ -1333,10 +1404,10 @@ export default {
             stuckRight = true
           } else {
             stuckRight = true
+            attackables.push(itemRight)
           }
         }
       }
-
       // Check if the king is stuck left up
       if (standingOnNum === 1 || standingOnLettIndex === 0) {
         stuckLeftUp = true
@@ -1347,10 +1418,10 @@ export default {
             stuckLeftUp = true
           } else {
             stuckLeftUp = true
+            attackables.push(itemLeftUp)
           }
         }
       }
-
       // Check if the king is stuck right up
       if (standingOnNum === 1 || standingOnLettIndex === 7) {
         stuckRightUp = true
@@ -1361,10 +1432,10 @@ export default {
             stuckRightUp = true
           } else {
             stuckRightUp = true
+            attackables.push(itemRightUp)
           }
         }
       }
-
       // Check if the king is stuck left down
       if (standingOnNum === 8 || standingOnLettIndex === 0) {
         stuckLeftDown = true
@@ -1375,10 +1446,10 @@ export default {
             stuckLeftDown = true
           } else {
             stuckLeftDown = true
+            attackables.push(itemLeftDown)
           }
         }
       }
-
       // Check if the king is stuck right down
       if (standingOnNum === 8 || standingOnLettIndex === 7) {
         stuckRightDown = true
@@ -1389,13 +1460,15 @@ export default {
             stuckRightDown = true
           } else {
             stuckRightDown = true
+            attackables.push(itemRightDown)
           }
         }
       }
-
-/*      console.log(stuckUp, stuckLeftUp, stuckRightUp)
+      console.log(stuckUp, stuckLeftUp, stuckRightUp)
       console.log(stuckLeft, "KING", stuckRight)
-      console.log(stuckDown, stuckLeftDown, stuckRightDown)*/
+      console.log(stuckDown, stuckLeftDown, stuckRightDown)
+      console.log(attackables)
+
 
       function addWalks(self, item) {
         item.classList.add("walkColor")
@@ -1436,9 +1509,7 @@ export default {
         const itemRightDown = document.getElementById(this.alphabet[standingOnLettIndex + 1] + (standingOnNum + 1))
         addWalks(this, itemRightDown)
       }
-
-
-      if(attackables.length > 0) {
+      if (attackables.length > 0) {
         attackables.forEach(item => {
           item.classList.add("attackColor")
           item.addEventListener("click", () => {
@@ -1446,7 +1517,6 @@ export default {
           })
         })
       }
-
     },
     kingWalk(currentKing, target) {
       // Haal alle kiddo's weg
@@ -1465,6 +1535,17 @@ export default {
       this.switchTurn()
     },
     kingAttack(currentKing, target) {
+      if (target.firstChild.alt === "queen") {
+        if (this.turn === "white") {
+          this.blackSkipTurns = 2
+        } else {
+          this.whiteSkipTurns = 2
+        }
+      }
+      if (target.firstChild.id.match(/[Clown]+/g)[1] === "Clown") {
+        this.clownDiedCleanup(target.firstChild)
+      }
+
       // Haal alle kiddo's weg
       while (target.firstChild) {
         target.removeChild(target.lastChild);
@@ -1482,7 +1563,7 @@ export default {
     },
 
     // Queen moveset
-    decideMoveQueen(targeted){
+    decideMoveQueen(targeted) {
       // Get block the queen is standing on
       const standingOn = targeted.target.parentElement.id;
       // Get current pawn in (white/black)queen format
@@ -1621,9 +1702,9 @@ export default {
         }
       }
 
-/*      console.log(stuckUp, stuckLeftUp, stuckRightUp)
-      console.log(stuckLeft, "queen", stuckRight)
-      console.log(stuckDown, stuckLeftDown, stuckRightDown)*/
+      /*      console.log(stuckUp, stuckLeftUp, stuckRightUp)
+            console.log(stuckLeft, "queen", stuckRight)
+            console.log(stuckDown, stuckLeftDown, stuckRightDown)*/
 
 
       function addWalks(self, item) {
