@@ -69,10 +69,6 @@ Progress so far:
 - [X] Kings move
 - [X] Kings attack
 
-- Advanced stuff/rules (might make, might not):
-- [ ] Check prevent walking into check https://www.chess.com/terms/check-chess  
-- [ ] Stalemate  https://www.chess.com/terms/stalemate-chess
-
 ## How to start programming
 
 Project was made in [nuxt 3](https://v3.nuxtjs.org)
