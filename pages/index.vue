@@ -1,10 +1,10 @@
 <template>
   <div id="wrapper" class="flex justify-center content-center flex-col">
     <h1 class="text-white text-center">It's now: <span class="bold text-3xl">{{ turn }}</span> 's turn</h1>
-    <h2 class="text-white text-center">It's now: black has: {{ blackSkipTurns }} turn skips</h2>
-    <h2 class="text-white text-center">It's now: white has: {{ whiteSkipTurns }} turn skips</h2>
+    <h2 class="text-white text-center">Black has: {{ blackSkipTurns }} turn skips</h2>
+    <h2 class="text-white text-center">White has: {{ whiteSkipTurns }} turn skips</h2>
     <!--Toggle dev tools -->
-    <div class="flex flex-row">
+    <div class="flex flex-row gap-4">
       <div class="m-1 flex flex-row">
         <p class="text-white mr-2">Turn tools:</p>
         <input aria-label="Dev tools toggle" @click="toggleTurnTools" type="checkbox">
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div v-show="turnToolsOn" class="flex flex-row mb-1">
+    <div v-show="turnToolsOn" class="flex flex-row mb-5">
       <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="switchTurn">Switch Turn</button>
       <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="blackSkipTurns = 0">Reset black skip Turn
       </button>
@@ -26,7 +26,7 @@
       <button class="bg-white text-black p-2 ml-[10%] max-w-[200px]" @click="resetGame">Reset Game</button>
     </div>
 
-    <div v-show="godMode" class="flex flex-row mb-1 gap-5">
+    <div v-show="godMode" class="flex flex-row mb-2 gap-5">
 
       <div class="flex flex-col gap-3">
         <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllPawns('black')">Remove all black pawns
@@ -474,7 +474,7 @@ export default {
         window.location.reload()
       }
 
-      if (queenSelected && !kingSelected && !clownSelectedL && !clownSelectedR && !bruteSelectedL && !bruteSelectedR && !rookSelectedL && !rookSelectedR) {
+      if (queenSelected && !kingSelected && !bruteSelectedL && !bruteSelectedR && !rookSelectedL && !rookSelectedR) {
         alert(notTurn + " won")
         alert(notTurn + " won")
         window.location.reload()
