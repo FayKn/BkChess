@@ -4,15 +4,77 @@
     <h2 class="text-white text-center">It's now: black has: {{ blackSkipTurns }} turn skips</h2>
     <h2 class="text-white text-center">It's now: white has: {{ whiteSkipTurns }} turn skips</h2>
     <!--Toggle dev tools -->
-    <div class="m-1 flex flex-row">
-      <p class="text-white mr-2">Dev tools:</p>
-      <input aria-label="Dev tools toggle" @click="toggleDevTools" type="checkbox">
+    <div class="flex flex-row">
+      <div class="m-1 flex flex-row">
+        <p class="text-white mr-2">Turn tools:</p>
+        <input aria-label="Dev tools toggle" @click="toggleTurnTools" type="checkbox">
+      </div>
+      <div class="m-1 flex flex-row">
+        <p class="text-white mr-2">god tools:</p>
+        <input aria-label="god mode toggle" @click="toggleGodMode" type="checkbox">
+      </div>
     </div>
-    <div v-show="devToolsOn" class="flex flex-row mb-1">
+
+    <div v-show="turnToolsOn" class="flex flex-row mb-1">
       <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="switchTurn">Switch Turn</button>
-      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="blackSkipTurns = 0">Reset black skip Turn</button>
-      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="whiteSkipTurns = 0">Reset white skips Turn</button>
+      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="blackSkipTurns = 0">Reset black skip Turn
+      </button>
+      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="whiteSkipTurns = 0">Reset white skips Turn
+      </button>
+
+
+      <button class="bg-white text-black p-2 ml-[10%] max-w-[200px]" @click="resetGame">Reset Game</button>
     </div>
+
+    <div v-show="godMode" class="flex flex-row mb-1 gap-5">
+
+      <div class="flex flex-col gap-3">
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllPawns('black')">Remove all black pawns
+        </button>
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllPawns('white')">Remove all white pawns
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllRooks('black')">Remove all black rooks
+        </button>
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllRooks('white')">Remove all white rooks
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllBrutes('black')">Remove all black
+          brutes
+        </button>
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllBrutes('white')">Remove all white
+          brutes
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllClowns('black')">Remove all black
+          clowns
+        </button>
+        <button class="bg-white text-black p-2 max-w-[200px]" @click="removeAllClowns('white')">Remove all white
+          clowns
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3 ml-[20%]">
+        <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="removeQueen('black')">Remove black queen
+        </button>
+        <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="removeQueen('white')">Remove white queen
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="removeKing('white')">Remove white king
+        </button>
+        <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="removeKing('black')">Remove black king
+        </button>
+      </div>
+    </div>
+
     <div id="board" class="flex justify-center">
       <div class="flex flex-row select-none">
         <!--row 1 -->
@@ -65,7 +127,8 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="b8" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" alt="brute" src="/pieces/brute.webp"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteL" class="w-[70%]" alt="brute"
+                 src="/pieces/brute.webp"/>
           </div>
         </div>
         <!--row 3 -->
@@ -200,7 +263,8 @@
                  src="/pieces/pawn.svg"/>
           </div>
           <div id="g8" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" alt="brute" src="/pieces/brute.webp"/>
+            <img @click="decideMoveBrute($event)" id="whiteBruteR" class="w-[70%]" alt="brute"
+                 src="/pieces/brute.webp"/>
           </div>
         </div>
         <!--row 8 -->
@@ -249,7 +313,8 @@ export default {
       turn: "white",
       blackSkipTurns: 0,
       whiteSkipTurns: 0,
-      devToolsOn: false,
+      turnToolsOn: false,
+      godMode: false,
     }
   },
   methods: {
@@ -402,14 +467,101 @@ export default {
       }
 
 
+      // Victory check
       if (!queenSelected && !kingSelected) {
         alert(notTurn + " won")
         alert(notTurn + " won")
         window.location.reload()
       }
+
+      if (queenSelected && !kingSelected && !clownSelectedL && !clownSelectedR && !bruteSelectedL && !bruteSelectedR && !rookSelectedL && !rookSelectedR) {
+        alert(notTurn + " won")
+        alert(notTurn + " won")
+        window.location.reload()
+      }
     },
-    toggleDevTools() {
-      this.devToolsOn = !this.devToolsOn
+
+
+    // funni dev tools
+    toggleTurnTools() {
+      this.turnToolsOn = !this.turnToolsOn
+    },
+    toggleGodMode() {
+      this.godMode = !this.godMode
+    },
+
+    resetGame() {
+      window.location.reload()
+    },
+    removeAllPawns(color) {
+      for (let i = 1; i < 9; i++) {
+        let pawnToSelect = color + "Pawn" + i
+
+        const pawnSelected = document.getElementById(pawnToSelect)
+        if (pawnSelected) {
+          pawnSelected.remove()
+        }
+      }
+    },
+    removeAllRooks(color) {
+      let rookToSelectL = color + "RookL"
+      let rookToSelectR = color + "RookR"
+
+      const rookSelectedL = document.getElementById(rookToSelectL)
+      const rookSelectedR = document.getElementById(rookToSelectR)
+
+      if (rookSelectedL) {
+        rookSelectedL.remove()
+      }
+      if (rookSelectedR) {
+        rookSelectedR.remove()
+      }
+    },
+    removeAllBrutes(color) {
+      let bruteToSelectL = color + "BruteL"
+      let bruteToSelectR = color + "BruteR"
+
+      const bruteSelectedL = document.getElementById(bruteToSelectL)
+      const bruteSelectedR = document.getElementById(bruteToSelectR)
+
+      if (bruteSelectedL) {
+        bruteSelectedL.remove()
+      }
+      if (bruteSelectedR) {
+        bruteSelectedR.remove()
+      }
+    },
+    removeAllClowns(color) {
+      let clownToSelectL = color + "ClownL"
+      let clownToSelectR = color + "ClownR"
+
+      const clownSelectedL = document.getElementById(clownToSelectL)
+      const clownSelectedR = document.getElementById(clownToSelectR)
+
+      if (clownSelectedL) {
+        clownSelectedL.remove()
+      }
+      if (clownSelectedR) {
+        clownSelectedR.remove()
+      }
+    },
+    removeKing(color) {
+      let kingToSelect = color + "King"
+
+      const kingSelected = document.getElementById(kingToSelect)
+
+      if (kingSelected) {
+        kingSelected.remove()
+      }
+    },
+    removeQueen(color) {
+      let queenToSelect = color + "Queen"
+
+      const queenSelected = document.getElementById(queenToSelect)
+
+      if (queenSelected) {
+        queenSelected.remove()
+      }
     },
 
 
