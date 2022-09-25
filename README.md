@@ -1,38 +1,35 @@
 # BkChess: It's like chess but worse
 
-In this project I want to attemt to make Chess easier to learn and also less boring by upping the pace
-white making it more "realistic" by applying logic
+In this project I want to attemt to make Chess easier to learn and also less boring by upping the pace and adding some funni
+while making it more "realistic" by applying logic
 
 
 Known bugs
 ----------
 - None yet :)
+----------
 
 The differences between this and normal chess are:
 - King and queen need to be captured to win (a country can still function with only one monarch and gender equality)
-- Castling is not allowed (it's dumb, I don't understand it so it's clearly not easy /s)
-- Knights are brutes
+- Castling is not allowed (I don't understand it lol)
 - Brutes only move 2 steps in a cross and kill everything in their path including thier own team
 
 ![Brute movement](bruteMovement.png)
 
-- Enpessant is not allowed
-
+- Enpessant is not allowed, I don't like the rule because you're hitting something that isn't there and it's confusing for new players
 
 
 - Promotion is not allowed this leaves pawn stranded and unable to move as a kind of meat shield, brutes would be best to clear the way if you want them gone
 
  
-- The bichop aka clown has an AOE distraction effect, the blocks in front of it is are confused and won't be able to move except for the king because he's based. 
+- The clown has an AOE distraction effect, the blocks in front of it is are confused and won't be able to move except for the king because he's based. 
 Can walk 1 step each direction
   ![clown movement](clownMovement.png)
 - If movement fields of clowns overlaps and the other clown moves the clown will need to move to reset it because attention has been stolen
 - Clowns can't distract other clowns
 
-- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepit, when she dies skips 2 turns for the opposing team, if a brute of the same team kills the queen 2 they get 2 free turns
-- so if a white brute kills a white team the black team has to skip 2 turns, no this isn't a bug I've covered up as a rule because I found it hilarious and writing this would probably take longer then fixing it
-
-The code is a mess right now and I should maybe fix it sometime...
+- Queen only moves 1 step in any direction and can't kill anything because she's old and decrepit, when she dies the team that didn't kill her has to skip 2 turns
+- so if a white brute kills a white queen the black team has to skip 2 turns, no this isn't a bug I've covered up as a rule because I found it hilarious and writing this would probably take longer then fixing it
 
 Progress so far:
 - [x] Turns
