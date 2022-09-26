@@ -80,10 +80,10 @@
         <!--row 1 -->
         <div id="a">
           <div id="a1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveRook($event)" id="blackRookL" alt="Rook" src="/pieces/rook.svg"/>
+            <img id="blackRookL" alt="Rook" src="/pieces/rook.svg"/>
           </div>
           <div id="a2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn1" class="w-[70%]" alt="Pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn1" class="w-[70%]" alt="Pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="a3" class="boardItemSize bg-blue-400">
           </div>
@@ -105,11 +105,11 @@
         <!--row 2 -->
         <div id="b">
           <div id="b1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveBrute($event)" id="blackBruteL" class="w-[70%] invert" alt="brute"
+            <img id="blackBruteL" class="w-[70%] invert" alt="brute"
                  src="/pieces/brute.webp"/>
           </div>
           <div id="b2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn2" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn2" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="b3" class="boardItemSize bg-blue-800">
 
@@ -134,10 +134,10 @@
         <!--row 3 -->
         <div id="c">
           <div id="c1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveClown" id="blackClownL" class="w-[50%] invert" alt="clown" src="/pieces/clown.webp"/>
+            <img id="blackClownL" class="w-[50%] invert" alt="clown" src="/pieces/clown.webp"/>
           </div>
           <div id="c2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn3" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn3" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="c3" class="boardItemSize bg-blue-400">
           </div>
@@ -159,10 +159,10 @@
         <!--row 4 -->
         <div id="d">
           <div id="d1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveKing($event)" id="blackKing" class="invert" alt="king" src="/pieces/king.webp"/>
+            <img id="blackKing" class="invert" alt="king" src="/pieces/king.webp"/>
           </div>
           <div id="d2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn4" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn4" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="d3" class="boardItemSize bg-blue-800">
           </div>
@@ -185,10 +185,10 @@
         <!--row 5 -->
         <div id="e">
           <div id="e1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveQueen($event)" id="blackQueen" class="invert" alt="queen" src="/pieces/queen.webp"/>
+            <img id="blackQueen" class="invert" alt="queen" src="/pieces/queen.webp"/>
           </div>
           <div id="e2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn5" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn5" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="e3" class="boardItemSize bg-blue-400">
 
@@ -213,10 +213,10 @@
         <!--row 6 -->
         <div id="f">
           <div id="f1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveClown" id="blackClownR" class="w-[50%] invert" alt="clown" src="/pieces/clown.webp"/>
+            <img id="blackClownR" class="w-[50%] invert" alt="clown" src="/pieces/clown.webp"/>
           </div>
           <div id="f2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn6" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn6" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="f3" class="boardItemSize bg-blue-800">
 
@@ -241,11 +241,11 @@
         <!--row 7 -->
         <div id="g">
           <div id="g1" class="boardItemSize bg-blue-400">
-            <img @click="decideMoveBrute($event)" id="blackBruteR" class="w-[70%] invert" alt="brute"
+            <img id="blackBruteR" class="w-[70%] invert" alt="brute"
                  src="/pieces/brute.webp"/>
           </div>
           <div id="g2" class="boardItemSize bg-blue-800">
-            <img @click="decideMovePawn($event)" id="blackPawn7" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn7" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="g3" class="boardItemSize bg-blue-400">
 
@@ -270,10 +270,10 @@
         <!--row 8 -->
         <div id="h">
           <div id="h1" class="boardItemSize bg-blue-800">
-            <img @click="decideMoveRook($event)" id="blackRookR" alt="rook" src="/pieces/rook.svg"/>
+            <img id="blackRookR" alt="rook" src="/pieces/rook.svg"/>
           </div>
           <div id="h2" class="boardItemSize bg-blue-400">
-            <img @click="decideMovePawn($event)" id="blackPawn8" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
+            <img id="blackPawn8" class="w-[70%]" alt="pawn" src="/pieces/pawn.svg"/>
           </div>
           <div id="h3" class="boardItemSize bg-blue-800">
           </div>
@@ -304,13 +304,14 @@ export default {
   name: "index",
   head() {
     return {
-      title: "TopGhess"
+      title: "BKchess - Chess but funni"
     };
   },
   data() {
     return {
       alphabet: ["a", "b", "c", "d", "e", "f", "g", "h"],
       turn: "white",
+      itemSelected: false,
       blackSkipTurns: 0,
       whiteSkipTurns: 0,
       turnToolsOn: false,
@@ -319,26 +320,29 @@ export default {
   },
   methods: {
     // Universal functions
-    switchTurn() {
+    switchTurn(noSwitch = false) {
       let notTurn
-      if (this.turn === "white") {
-        if (this.blackSkipTurns === 0) {
-          this.turn = "black"
-          notTurn = "white"
+      this.itemSelected = false
+      if(!noSwitch) {
+        if (this.turn === "white") {
+          if (this.blackSkipTurns === 0) {
+            this.turn = "black"
+            notTurn = "white"
+          } else {
+            this.blackSkipTurns--
+            this.turn = "white"
+            notTurn = "black"
+          }
         } else {
-          this.blackSkipTurns--
-          this.turn = "white"
-          notTurn = "black"
-        }
-      } else {
-        // TODO: change back to white
-        if (this.whiteSkipTurns === 0) {
-          this.turn = "white"
-          notTurn = "black"
-        } else {
-          this.whiteSkipTurns--
-          this.turn = "black"
-          notTurn = "white"
+          // TODO: change back to white
+          if (this.whiteSkipTurns === 0) {
+            this.turn = "white"
+            notTurn = "black"
+          } else {
+            this.whiteSkipTurns--
+            this.turn = "black"
+            notTurn = "white"
+          }
         }
       }
 
@@ -627,6 +631,12 @@ export default {
       this.switchTurn()
     },
     decideMovePawn(targeted) {
+
+      if(this.itemSelected){
+        this.switchTurn(true)
+      }
+
+      this.itemSelected = true
       // Get block pawn is standing on
       let standingOn
       // Get current pawn in (white/black)Pawn# format
@@ -934,6 +944,12 @@ export default {
       this.switchTurn()
     },
     decideMoveRook(targeted) {
+
+      if(this.itemSelected){
+        this.switchTurn(true)
+      }
+
+      this.itemSelected = true
       // Get block pawn is standing on
       let standingOn
       // Get current pawn in (white/black)Rook(R/L) format
@@ -1209,6 +1225,12 @@ export default {
 
     // Brute move set
     decideMoveBrute(targeted) {
+
+      if(this.itemSelected){
+        this.switchTurn(true)
+      }
+
+      this.itemSelected = true
       // Get block pawn is standing on
       const standingOn = targeted.target.parentElement.id;
 
@@ -1273,7 +1295,6 @@ export default {
 
       // Haal alle kiddo's weg
       while (firstVictim.firstChild) {
-        console.log(firstVictim.firstChild)
         if (firstVictim.firstChild.alt === "queen") {
           if (this.turn === "white") {
             this.blackSkipTurns = 2
@@ -1318,6 +1339,12 @@ export default {
 
     // Clown move set
     decideMoveClown(targeted) {
+      if(this.itemSelected){
+        this.switchTurn(true)
+      }
+
+      this.itemSelected = true
+
       // Get block clown is standing on
       const standingOn = targeted.target.parentElement.id;
       // Get current pawn in (white/black)Clown(R/L) format
@@ -1461,7 +1488,6 @@ export default {
       this.switchTurn()
     },
     clownDiedCleanup(killedClown) {
-      console.log(killedClown.id)
       const killedClownSide = killedClown.id.match(/[R|L]/)[0]
       const killedClownColor = killedClown.id.match(/[black|white]+/)[0]
 
@@ -1484,6 +1510,12 @@ export default {
 
     // King moveset
     decideMoveKing(targeted) {
+
+      if(this.itemSelected){
+        this.switchTurn(true)
+      }
+
+      this.itemSelected = true
       // Get block the King is standing on
       const standingOn = targeted.target.parentElement.id;
       // Get current pawn in (white/black)King format
@@ -1616,10 +1648,10 @@ export default {
           }
         }
       }
-      console.log(stuckUp, stuckLeftUp, stuckRightUp)
+/*      console.log(stuckUp, stuckLeftUp, stuckRightUp)
       console.log(stuckLeft, "KING", stuckRight)
       console.log(stuckDown, stuckLeftDown, stuckRightDown)
-      console.log(attackables)
+      console.log(attackables)*/
 
 
       function addWalks(self, item) {
@@ -1716,6 +1748,11 @@ export default {
 
     // Queen moveset
     decideMoveQueen(targeted) {
+      if(this.itemSelected){
+        this.switchTurn(true)
+      }
+
+      this.itemSelected = true
       // Get block the queen is standing on
       const standingOn = targeted.target.parentElement.id;
       // Get current pawn in (white/black)queen format
