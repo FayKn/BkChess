@@ -16,7 +16,7 @@
     </div>
 
     <div v-show="turnToolsOn" class="flex flex-row mb-5">
-      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="switchTurn">Switch Turn</button>
+      <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="switchTurn(false)">Switch Turn</button>
       <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="blackSkipTurns = 0">Reset black skip Turn
       </button>
       <button class="bg-white text-black p-2 ml-1 max-w-[200px]" @click="whiteSkipTurns = 0">Reset white skips Turn
@@ -1225,12 +1225,6 @@ export default {
 
     // Brute move set
     decideMoveBrute(targeted) {
-
-      if (this.itemSelected) {
-        this.switchTurn(true)
-      }
-
-      this.itemSelected = true
       // Get block pawn is standing on
       const standingOn = targeted.target.parentElement.id;
 

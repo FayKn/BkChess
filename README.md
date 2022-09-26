@@ -6,7 +6,7 @@ while making it more "realistic" by applying logic
 
 Known bugs
 ----------
-- None yet :)
+- The thing that should remove the other walkables when another piece is sleected is not working for Brutes dunno why tho
 ----------
 
 The differences between this and normal chess are:
