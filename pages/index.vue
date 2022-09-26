@@ -323,7 +323,7 @@ export default {
     switchTurn(noSwitch = false) {
       let notTurn
       this.itemSelected = false
-      if(!noSwitch) {
+      if (!noSwitch) {
         if (this.turn === "white") {
           if (this.blackSkipTurns === 0) {
             this.turn = "black"
@@ -632,7 +632,7 @@ export default {
     },
     decideMovePawn(targeted) {
 
-      if(this.itemSelected){
+      if (this.itemSelected) {
         this.switchTurn(true)
       }
 
@@ -945,7 +945,7 @@ export default {
     },
     decideMoveRook(targeted) {
 
-      if(this.itemSelected){
+      if (this.itemSelected) {
         this.switchTurn(true)
       }
 
@@ -1226,7 +1226,7 @@ export default {
     // Brute move set
     decideMoveBrute(targeted) {
 
-      if(this.itemSelected){
+      if (this.itemSelected) {
         this.switchTurn(true)
       }
 
@@ -1339,7 +1339,7 @@ export default {
 
     // Clown move set
     decideMoveClown(targeted) {
-      if(this.itemSelected){
+      if (this.itemSelected) {
         this.switchTurn(true)
       }
 
@@ -1511,7 +1511,7 @@ export default {
     // King moveset
     decideMoveKing(targeted) {
 
-      if(this.itemSelected){
+      if (this.itemSelected) {
         this.switchTurn(true)
       }
 
@@ -1648,10 +1648,11 @@ export default {
           }
         }
       }
-/*      console.log(stuckUp, stuckLeftUp, stuckRightUp)
-      console.log(stuckLeft, "KING", stuckRight)
-      console.log(stuckDown, stuckLeftDown, stuckRightDown)
-      console.log(attackables)*/
+
+      /*      console.log(stuckUp, stuckLeftUp, stuckRightUp)
+            console.log(stuckLeft, "KING", stuckRight)
+            console.log(stuckDown, stuckLeftDown, stuckRightDown)
+            console.log(attackables)*/
 
 
       function addWalks(self, item) {
@@ -1748,7 +1749,7 @@ export default {
 
     // Queen moveset
     decideMoveQueen(targeted) {
-      if(this.itemSelected){
+      if (this.itemSelected) {
         this.switchTurn(true)
       }
 
