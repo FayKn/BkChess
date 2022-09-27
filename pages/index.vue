@@ -346,7 +346,7 @@ export default {
         }
       }
 
-      // Remove all the walk or attack classes
+      // Remove all the walk or attack classes to clean up after the pieces that leave optional steps
       document.querySelectorAll(".walkColor").forEach((el) => {
         el.classList.remove("walkColor");
       });
